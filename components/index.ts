@@ -1,1 +1,5 @@
 export * from './footer/Footer';
+export * from './logo/Logo'
+export * from './button/Button'
+export * from './sonylogo/SonyLogo'
+export * from './navbar/Navbar'
