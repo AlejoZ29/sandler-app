@@ -1,15 +1,16 @@
-import type { Metadata } from 'next';
 import React from 'react'
+import type { Metadata } from 'next';
+import { RegistrationForm } from '@/components';
 
 export const metadata: Metadata = {
- title: 'Form Page',
- description: 'Form Page',
+ title: 'Formulario de Registro - The Sandler Style',
+ description: 'Formulario de registro para The Sandler Style',
 };
 
 export default function FormPage() {
   return (
-    <div className="font-sans flex flex-col items-center justify-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <div className="text-2xl font-bold text-white">Form Page</div>
+    <div className="page-form">
+      <RegistrationForm />
     </div>
   )
 }

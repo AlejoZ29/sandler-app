@@ -53,7 +53,12 @@ export const VerificationFlow = () => {
       {isVerifying && (
         <div className="flex flex-col items-center transition-all duration-500 ease-in-out">
           <CodeInput code={code} onChange={handleCodeChange} />
-          <Button classes="mt-10" textButton="Verificar" callToAction={handleVerify} />
+          <Button 
+            classes="mt-10" 
+            textButton="Verificar" 
+            disabled={code.length !== 6}
+            callToAction={handleVerify} 
+          />
         </div>
       )}
 
