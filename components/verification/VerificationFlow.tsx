@@ -34,7 +34,7 @@ export const VerificationFlow = () => {
 
   return (
     <div className="font-sans flex flex-col items-center justify-center h-screen p-8 sm:p-20">
-      <div className={`transition-all duration-500 ease-in-out ${isVerifying ? 'transform -translate-y-8 scale-75' : ''}`}>
+      <div className={`transition-all duration-500 ease-in-out w-80 lg:w-xl ${isVerifying ? 'transform -translate-y-8 scale-75' : ''}`}>
         <Image
           src="/assets/logo.png"
           width={450}
@@ -42,7 +42,7 @@ export const VerificationFlow = () => {
           alt="Logo Sandlers Show"
           className="transition-all duration-500 ease-in-out mx-auto w-500 lg:w-[600px]"
         />
-        <p className={`${isVerifying ? '-mt-2 lg:mt-0 -mb-10' : '-mt-2 lg:mt-0'} text-center mx-auto shadow-amber-300 text-xl lg:text-2xl text-white font-medium transition-all duration-500 w-[500px]`}>
+        <p className={`${isVerifying ? '-mt-2 lg:mt-0 -mb-10' : '-mt-2 lg:mt-0'} text-center mx-auto shadow-amber-300 text-sm md:text-xl lg:text-2xl text-white font-medium transition-all duration-500 mt-2 md:w-[500px]`}>
           {isVerifying 
             ? (error || "Ingresa el código para continuar")
             : "Estar a la moda, es tenerlo en tu pantalla"

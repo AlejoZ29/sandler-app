@@ -90,8 +90,6 @@ export const RegistrationForm = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center mx-12 lg:mx-auto lg:grid lg:grid-cols-12">
-
-
       <div className="col-start-8 col-end-12 w-full mx-12 lg:mx-auto max-w-[600px]">
         <div className="mb-8">
           <Logo textClasses="lg:mt-0 text-center"/>
@@ -100,7 +98,7 @@ export const RegistrationForm = () => {
         <form className="w-full max-w space-y-4" onSubmit={handleSubmit}>
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
-              Nombre: {errors.name && <span className="text-red-500">*</span>}
+              Nombre:
             </label>
             <input
               type="text"
@@ -108,11 +106,12 @@ export const RegistrationForm = () => {
               onChange={(e) => handleInputChange('name', e.target.value)}
               className="w-full px-4 py-2 bg-white rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none"
             />
+             {errors.name && <span className="text-red-500">*</span>}
           </div>
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
-              Apellido: {errors.lastName && <span className="text-red-500">*</span>}
+              Apellido: 
             </label>
             <input
               type="text"
@@ -120,11 +119,12 @@ export const RegistrationForm = () => {
               onChange={(e) => handleInputChange('lastName', e.target.value)}
               className="w-full px-4 py-2 bg-white rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none"
             />
+            {errors.lastName && <span className="text-red-500">*</span>}
           </div>
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
-              Empresa: {errors.compain && <span className="text-red-500">*</span>}
+              Empresa: 
             </label>
             <input
               type="text"
@@ -132,11 +132,12 @@ export const RegistrationForm = () => {
               onChange={(e) => handleInputChange('compain', e.target.value)}
               className="w-full px-4 py-2 bg-white rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none"
             /> 
+            {errors.compain && <span className="text-red-500">*</span>}
           </div>
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
-              Cargo: {errors.role && <span className="text-red-500">*</span>}
+              Cargo: 
             </label>
             <input
               type="text"
@@ -144,11 +145,12 @@ export const RegistrationForm = () => {
               onChange={(e) => handleInputChange('role', e.target.value)}
               className="w-full px-4 py-2 bg-white rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none"
             />
+            {errors.role && <span className="text-red-500">*</span>}
           </div>
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
-              Email: {errors.email && <span className="text-red-500">*</span>}
+              Email: 
             </label>
             <input
               type="email"
@@ -156,11 +158,12 @@ export const RegistrationForm = () => {
               onChange={(e) => handleInputChange('email', e.target.value)}
               className="w-full px-4 py-2 bg-white rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none"
             />
+            {errors.email && <span className="text-red-500">*</span>}
           </div>
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
-              ¿Cuándo celebramos contigo? {errors.birthday && <span className="text-red-500">*</span>}
+              ¿Cuándo celebramos contigo?
             </label>
             <input
               type="date"
@@ -168,6 +171,7 @@ export const RegistrationForm = () => {
               onChange={(e) => handleInputChange('birthday', e.target.value)}
               className="w-full px-4 py-2 bg-white rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none"
             />
+             {errors.birthday && <span className="text-red-500">*</span>}
           </div>
 
           <div className="flex items-start space-x-2">
@@ -178,10 +182,9 @@ export const RegistrationForm = () => {
               className="mt-1"
             />
             <label className="text-white text-sm">
-              {errors.policy && <span className="text-red-500">*</span>}
               Al continuar, aceptas nuestra política de tratamiento de datos.{' '}
               <a 
-                href="https://www.google.com" 
+                href="https://intl.sonypictures.com/es/privacy-policy" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-yellow-400 underline hover:text-yellow-300"
@@ -189,6 +192,7 @@ export const RegistrationForm = () => {
                 Ver política completa aquí
               </a>
             </label>
+            {errors.policy && <span className="text-red-500">*</span>}
           </div>
           <div className="pt-4 flex flex-col items-center mt-10">
             <Button 
