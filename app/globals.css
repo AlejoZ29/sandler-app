@@ -19,6 +19,18 @@
   }
 }
 
+* {
+  cursor: url('/assets/cursor.png'), auto !important;
+}
+
+button, input, [role="button"], .cursor-pointer {
+  cursor: url('/assets/cursor.png'), pointer !important;
+}
+
+button:hover, input:hover, [role="button"]:hover, .cursor-pointer:hover {
+  cursor: url('/assets/cursor.png'), pointer !important;
+}
+
 html, body {
   height: 100vh;
   overflow: hidden;
