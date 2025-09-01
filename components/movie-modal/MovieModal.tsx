@@ -1,8 +1,9 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components';
 import { Counter } from '@/components/counter/Counter';
+import { getMovieImagePaths } from './movieImageConfig';
 
 interface MovieModalProps {
   isOpen: boolean;
@@ -21,7 +22,25 @@ export const MovieModal: React.FC<MovieModalProps> = ({
   onClose,
   onLearnMore
 }) => {
+  const [movieImageError, setMovieImageError] = useState(false);
+  const [lookImageError, setLookImageError] = useState(false);
+
+  // Resetear errores cuando cambia la película seleccionada
+  useEffect(() => {
+    if (selectedMovie) {
+      setMovieImageError(false);
+      setLookImageError(false);
+    }
+  }, [selectedMovie]);
+
   if (!isOpen || !selectedMovie) return null;
+
+  // Obtener las rutas de las imágenes para la película seleccionada
+  const { movie: movieImagePath, look: lookImagePath, displayName } = getMovieImagePaths(selectedMovie);
+
+  // Determinar qué imagen mostrar (original o fallback)
+  const finalMovieImage = movieImageError ? '/assets/movies/zookeeper.png' : movieImagePath;
+  const finalLookImage = lookImageError ? '/assets/looks/zookeeper.png' : lookImagePath;
 
   return (
     <div className="fixed inset-0 z-[2000] flex items-center justify-center">
@@ -54,12 +73,13 @@ export const MovieModal: React.FC<MovieModalProps> = ({
           <div className="flex items-center justify-center">
             <div className="relative">
               <Image
-                src="/assets/looks/zookeeper.png"
-                alt="Movie Look"
+                src={finalLookImage}
+                alt={`${displayName} Look`}
                 width={400}
                 height={600}
                 className="rounded-lg shadow-2xl"
                 priority
+                onError={() => setLookImageError(true)}
               />
             </div>
           </div>
@@ -81,12 +101,13 @@ export const MovieModal: React.FC<MovieModalProps> = ({
             {/* 3. Movie Title Image */}
             <div className="flex justify-center">
               <Image
-                src="/assets/movies/zookeeper.png"
-                alt="Movie Title"
+                src={finalMovieImage}
+                alt={`${displayName} Title`}
                 width={600}
                 height={200}
                 className="rounded-lg"
                 priority
+                onError={() => setMovieImageError(true)}
               />
             </div>
 
