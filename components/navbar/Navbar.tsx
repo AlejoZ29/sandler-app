@@ -5,6 +5,7 @@ import { SonyLogo } from '../sonylogo/SonyLogo'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useGame } from '../../app/context/GameContext';
+import { Counter } from '../counter/Counter'
 
 export const Navbar = () => {
   const [isHome, setIsHome] = useState(false);
@@ -25,7 +26,7 @@ export const Navbar = () => {
       <div className="flex items-center gap-10 -mt-10 mr-10">
         {isHome && (
           <>
-            <Link href={'/404'}>
+            <Link href={'#'}>
               <Image
                 src="/assets/backstage.png"
                 width={150}
@@ -35,15 +36,8 @@ export const Navbar = () => {
               />
             </Link>
 
-            <Link href={'/404'} className="relative">
-              <Image
-                src="/assets/founded.png"
-                width={120}
-                height={30}
-                alt="Icono Backstage"
-                className="mx-auto"
-              />
-              <span className="text-sm absolute top-0 bottom-1 right-0 left-12 flex items-center justify-center text-amber-400 font-medium">{clickedImages.size}/{totalImages}</span>
+            <Link href={'#'} className="relative">
+              <Counter clickedImages={clickedImages} totalImages={totalImages} />
             </Link>
           </>
         )}
