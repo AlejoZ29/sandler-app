@@ -198,6 +198,7 @@ export const RegistrationForm = () => {
             <Button 
               textButton="Enviar" 
               disabled={!isFormValid()}
+              variant="primary"
             />
           </div>
         </form>
