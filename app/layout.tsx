@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Footer, Navbar } from "@/components";
+import { Footer, Navbar, SmallScreenMessage } from "@/components";
 import { GameProvider } from "./context/GameContext";
 
 const geistSans = Geist({
@@ -33,6 +33,7 @@ export default function RootLayout({
           <Navbar/>
           {children}
           <Footer />
+          <SmallScreenMessage showMessage={true} />
         </GameProvider>
       </body>
     </html>

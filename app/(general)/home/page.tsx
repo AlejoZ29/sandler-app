@@ -66,14 +66,15 @@ export default function HomePage() {
     handleImageClick('RESET_ALL');
   };
 
-  const closeModal = () => {
+  const closeModal = (resetMovie = true) => {
     setModalOpen(false);
-    setSelectedMovie(null);
+    if (resetMovie) {
+      setSelectedMovie(null);
+    }
   };
 
   const handleLearnMore = () => {
-    // Por ahora no hace nada
-    console.log('Learn more clicked');
+    // Esta función ya no es necesaria, el modal maneja internamente el cambio de vista
   };
 
   return (
@@ -108,7 +109,7 @@ export default function HomePage() {
       {/* Overlay */}
       <Overlay overlayEnabled={overlayEnabled} isPressed={isPressed} />
 
-      {/* Movie Discovery Modal */}
+      {/* Movie Modal */}
       <MovieModal
         isOpen={modalOpen}
         selectedMovie={selectedMovie}
