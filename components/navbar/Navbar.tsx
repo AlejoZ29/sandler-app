@@ -1,40 +1,35 @@
-'use client'
-import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
-import { SonyLogo } from '../sonylogo/SonyLogo'
-import Image from 'next/image'
-import { usePathname } from 'next/navigation'
+'use client';
+import React from 'react';
 import { useGame } from '../../app/context/GameContext';
-import { Counter } from '../counter/Counter'
+import { Backstage } from './Backstage';
+import { SonyLogo } from '../sonylogo/SonyLogo';
+import { Counter } from '../counter/Counter';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export const Navbar = () => {
-  const [isHome, setIsHome] = useState(false);
-  const pathname = usePathname();
   const { clickedImages, totalImages } = useGame();
-
-  useEffect(() => {
-    setIsHome(pathname === '/home');
-  }, [pathname]);
-
+  const pathname = usePathname();
+  const isHome = pathname === '/home';
+  const isCounterZero = clickedImages.size === 0;
 
   return (
-    <nav className='flex w-screen justify-between p-2 absolute z-50'>
-      <Link href={'/'} className='flex item-center mt-10'>
+    <nav className="flex w-screen justify-between p-2 absolute z-50">
+      <Link href={'/'} className="flex item-center mt-10">
         <SonyLogo />
       </Link>
 
       <div className="flex items-center gap-10 -mt-10 mr-10">
         {isHome && (
           <>
-            <Link href={'#'}>
-              <Image
-                src="/assets/backstage.png"
-                width={150}
-                height={30}
-                alt="Icono Backstage"
-                className="mx-auto"
-              />
-            </Link>
+            <Backstage
+              href="#"
+              src="/assets/backstage.png"
+              alt="Icono Backstage"
+              width={150}
+              height={30}
+              isActive={isCounterZero}
+            />
 
             <Link href={'#'} className="relative">
               <Counter clickedImages={clickedImages} totalImages={totalImages} />
@@ -42,7 +37,6 @@ export const Navbar = () => {
           </>
         )}
       </div>
-
     </nav>
-  )
-}
+  );
+};
