@@ -116,7 +116,7 @@ export default function HomePage() {
 
       {/* Movie Modal */}
       <MovieModal
-        isOpen={modalOpen}
+        isOpen={modalOpen && clickedImages.size !== 10}
         selectedMovie={selectedMovie}
         clickedImages={clickedImages}
         totalImages={totalImages}
