@@ -22,7 +22,6 @@ export default function HomePage() {
   const handleMouseDown = (e: React.MouseEvent) => {
     // Only activate overlay if it's enabled and clicking on the background
     if (overlayEnabled && e.target === e.currentTarget) {
-      console.log('Overlay activated');
       setIsPressed(true);
     }
   };
@@ -78,7 +77,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-x-auto overflow-y-hidden">
+    <div className="relative w-full h-screen overflow-x-hidden overflow-y-hidden">
       {/* Background Container with Fixed Size */}
       <div
         className="relative w-[3000px] h-full bg-cover bg-center bg-no-repeat"
