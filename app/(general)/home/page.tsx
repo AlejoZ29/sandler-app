@@ -78,26 +78,35 @@ export default function HomePage() {
   };
 
   return (
-    <div
-      className="page-home font-sans flex flex-col items-center justify-center min-h-screen p-8 pb-20 gap-16 sm:p-20 relative bg-cover bg-center"
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseLeave}
-      style={{ backgroundImage: "url('/assets/background-main.jpg')" }}
-    >
-      {/* Movie Grid */}
-      <MovieGrid
-        clickedImages={clickedImages}
-        overlayEnabled={overlayEnabled}
-        isPressed={isPressed}
-        onImageClick={handleLocalImageClick}
-        onMouseEnter={playSound}
-      />
+    <div className="relative w-full h-screen overflow-x-auto overflow-y-hidden">
+      {/* Background Container with Fixed Size */}
+      <div
+        className="relative w-[3000px] h-full bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/assets/background-main.jpg')" }}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseLeave}
+      >
+        {/* Movie Grid - Fixed to Background */}
+        <MovieGrid
+          clickedImages={clickedImages}
+          overlayEnabled={overlayEnabled}
+          isPressed={isPressed}
+          onImageClick={handleLocalImageClick}
+          onMouseEnter={playSound}
+        />
 
-      {/* Audio Player */}
-      <AudioPlayer ref={audioPlayerRef} isMuted={isMuted} />
+        {/* Overlay - Fixed to Background */}
+        <Overlay overlayEnabled={overlayEnabled} isPressed={isPressed} />
+      </div>
 
-      {/* Control Buttons */}
+      {/* Fixed Controls - Above Everything */}
+      <div className="fixed top-24 right-6 flex gap-3 z-[1000]">
+        {/* Audio Player */}
+        <AudioPlayer ref={audioPlayerRef} isMuted={isMuted} />
+      </div>
+
+      {/* Control Buttons - Fixed Position */}
       <ControlButtons
         isMuted={isMuted}
         overlayEnabled={overlayEnabled}
@@ -105,9 +114,6 @@ export default function HomePage() {
         onToggleOverlay={toggleOverlay}
         onResetCounter={resetCounter}
       />
-
-      {/* Overlay */}
-      <Overlay overlayEnabled={overlayEnabled} isPressed={isPressed} />
 
       {/* Movie Modal */}
       <MovieModal

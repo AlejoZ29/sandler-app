@@ -33,7 +33,7 @@ export const VerificationFlow = () => {
   };
 
   return (
-    <div className="font-sans flex flex-col items-center justify-center h-screen p-8 sm:p-20">
+    <div className="font-sans flex flex-col items-center justify-center h-full p-8 sm:p-20 overflow-x-hidden">
       <div className={`transition-all duration-500 ease-in-out w-80 lg:w-xl ${isVerifying ? 'transform -translate-y-8 scale-75' : ''}`}>
         <Image
           src="/assets/logo.png"

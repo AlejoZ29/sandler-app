@@ -13,9 +13,16 @@ export const Navbar = () => {
   const isHome = pathname === '/home';
   const isCounterZero = clickedImages.size === 0;
 
+  const getNavbarClasses = () => {
+    if (isHome) {
+      return "flex w-screen justify-between p-2 bg-black/80 backdrop-blur-sm";
+    }
+    return "flex w-full justify-between p-2 backdrop-blur-sm";
+  };
+
   return (
-    <nav className="flex w-screen justify-between p-2 absolute z-50">
-      <Link href={'/'} className="flex item-center mt-10">
+    <nav className={getNavbarClasses()}>
+      <Link href={'#'} className="flex item-center mt-10">
         <SonyLogo />
       </Link>
 

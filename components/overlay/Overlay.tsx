@@ -12,7 +12,7 @@ export const Overlay: React.FC<OverlayProps> = ({
 }) => {
   return (
     <div
-      className={`fixed inset-0 pointer-events-none z-[999] transition-opacity duration-300 ease-in-out ${
+      className={`absolute inset-0 pointer-events-none z-[999] transition-opacity duration-300 ease-in-out ${
         overlayEnabled && isPressed ? 'opacity-60' : 'opacity-0'
       }`}
       style={{

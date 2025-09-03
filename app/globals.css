@@ -33,13 +33,36 @@ button:hover, input:hover, [role="button"]:hover, .cursor-pointer:hover {
 
 html, body {
   height: 100vh;
-  overflow: hidden;
   background-image: url('/assets/background.jpg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  /* Bloquear zoom */
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Prevenir zoom en dispositivos táctiles */
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/* Prevenir zoom con gestos de pellizco */
+* {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .page-form {
@@ -47,6 +70,8 @@ html, body {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  height: 90vh;
+  width: 100vw;
 }
 
 @media (max-width: 1024px) {
@@ -60,4 +85,51 @@ html, body {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+}
+
+/* Custom scrollbar for horizontal scroll with button gradient */
+.overflow-x-auto::-webkit-scrollbar {
+  height: 8px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right, #fde047, #ca8a04, #fde047);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to right, #fef08a, #eab308, #fef08a);
+  box-shadow: 0 0 10px rgba(253, 224, 71, 0.5);
+}
+
+/* Custom scrollbar for vertical scroll with button gradient */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 8px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #fde047, #ca8a04, #fde047);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #fef08a, #eab308, #fef08a);
+  box-shadow: 0 0 10px rgba(253, 224, 71, 0.5);
+}
+
+/* Scrollbar para Firefox */
+* {
+  scrollbar-color: #ca8a04 rgba(0, 0, 0, 0.1);
 }
