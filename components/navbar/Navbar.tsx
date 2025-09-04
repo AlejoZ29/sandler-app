@@ -1,51 +1,42 @@
-'use client'
-import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
-import { SonyLogo } from '../sonylogo/SonyLogo'
-import Image from 'next/image'
+'use client';
+import React from 'react';
+import { useGame } from '../../app/context/GameContext';
+import { Backstage } from './Backstage';
+import { SonyLogo } from '../sonylogo/SonyLogo';
+import { Counter } from '../counter/Counter';
 import { usePathname } from 'next/navigation';
 
 export const Navbar = () => {
-  const [isHome, setIsHome] = useState(false);
+  const { clickedImages, totalImages } = useGame();
   const pathname = usePathname();
-
-  useEffect(() => {
-    setIsHome(pathname === '/home');
-  }, [pathname]);
+  const isHome = pathname === '/home';
+  const isCounterZero = clickedImages.size === 0;
 
 
   return (
-    <nav className='flex w-screen justify-between p-2 absolute z-50'>
-      <Link href={'/'} className='flex item-center mt-10'>
+    <nav className="absolute top-0 left-0 right-0 z-50 flex w-full justify-between -md:mt-32 mt-5 p-2">
+      <div className="flex item-center pl-32">
         <SonyLogo />
-      </Link>
+      </div>
 
-      <div className="flex items-center gap-10 -mt-10 mr-10">
+      <div className="flex items-center gap-4 md:gap-10 pr-32">
         {isHome && (
           <>
-            <Link href={'/404'}>
-              <Image
-                src="/assets/backstage.png"
-                width={150}
-                height={30}
-                alt="Icono Backstage"
-                className="mx-auto"
-              />
-            </Link>
+            <Backstage
+              href="#"
+              src="/assets/backstage.png"
+              alt="Icono Backstage"
+              width={150}
+              height={30}
+              isActive={isCounterZero}
+            />
 
-            <Link href={'/404'}>
-              <Image
-                src="/assets/founded.png"
-                width={120}
-                height={30}
-                alt="Icono Backstage"
-                className="mx-auto"
-              />
-            </Link>
+            <div className="relative">
+              <Counter clickedImages={clickedImages} totalImages={totalImages} />
+            </div>
           </>
         )}
       </div>
-
     </nav>
-  )
-}
+  );
+};
