@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button, CodeInput } from "@/components";
 
-const VALID_CODE = "123456";
+const VALID_CODE = "090966";
 
 export const VerificationFlow = () => {
   const [isVerifying, setIsVerifying] = useState(false);
