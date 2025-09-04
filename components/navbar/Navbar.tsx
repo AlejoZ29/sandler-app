@@ -15,11 +15,11 @@ export const Navbar = () => {
 
   return (
     <nav className="absolute top-0 left-0 right-0 z-50 flex w-full justify-between -md:mt-32 mt-5 p-2">
-      <div className="flex item-center pl-32">
+      <div className="flex item-center pl-32 scale-70 lg:scale-100">
         <SonyLogo />
       </div>
 
-      <div className="flex items-center gap-4 md:gap-10 pr-32">
+      <div className="flex items-center gap-4 md:gap-10 pr-32 scale-70 lg:scale-100">
         {isHome && (
           <>
             <Backstage

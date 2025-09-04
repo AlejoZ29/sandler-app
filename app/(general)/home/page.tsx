@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import React, { useState, useRef } from 'react'
 import Image from 'next/image'
 import { useGame } from '../../context/GameContext';
-import { Overlay } from '@/components';
+import { Overlay, LandscapePrompt } from '@/components';
 import { ControlButtons } from '@/components/controls/Controls';
 import { AudioPlayer, AudioPlayerRef } from '@/components/audio-player/AudioPlayer';
 
@@ -58,6 +58,7 @@ export default function HomePage() {
 
   return (
     <div className="relative w-full h-screen overflow-hidden page-home">
+      <LandscapePrompt />
       <Overlay overlayEnabled={overlayEnabled} isPressed={isPressed} />
       <svg 
         viewBox="0 0 1920 1080" 
@@ -521,13 +522,15 @@ export default function HomePage() {
 
       <AudioPlayer ref={audioPlayerRef} isMuted={isMuted} />
 
-      <ControlButtons
-        isMuted={isMuted}
-        overlayEnabled={overlayEnabled}
-        onToggleMute={toggleMute}
-        onToggleOverlay={toggleOverlay}
-        onResetCounter={resetCounter}
-      />
+      <div className="controls-container">
+        <ControlButtons
+          isMuted={isMuted}
+          overlayEnabled={overlayEnabled}
+          onToggleMute={toggleMute}
+          onToggleOverlay={toggleOverlay}
+          onResetCounter={resetCounter}
+        />
+      </div>
     </div>
   )
 }
