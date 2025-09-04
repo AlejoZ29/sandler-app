@@ -42,7 +42,9 @@ export const RegistrationForm = () => {
       case 'email':
         return typeof value === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
       case 'birthday':
-        return typeof value === 'string' && value.trim().length > 0;
+        if (typeof value !== 'string') return false;
+        const birthdayRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])$/;
+        return birthdayRegex.test(value.trim());
       case 'policy':
         return value === true;
       default:
@@ -54,11 +56,88 @@ export const RegistrationForm = () => {
     validateForm()
   }, [formData])
 
+  const formatBirthday = (value: string) => {
+    // Remove all non-digits
+    const digits = value.replace(/\D/g, '');
+    
+    // Limit to 4 digits
+    const limitedDigits = digits.slice(0, 4);
+    
+    if (limitedDigits.length === 0) return '';
+    
+    if (limitedDigits.length === 1) {
+      // Single digit - add leading zero
+      return `0${limitedDigits}`;
+    }
+    
+    if (limitedDigits.length === 2) {
+      // Two digits - validate day (01-31)
+      const day = parseInt(limitedDigits);
+      if (day < 1 || day > 31) {
+        return limitedDigits.slice(0, 1); // Keep only first digit if invalid
+      }
+      return limitedDigits;
+    }
+    
+    if (limitedDigits.length === 3) {
+      // Day complete, starting month
+      const day = parseInt(limitedDigits.slice(0, 2));
+      const monthDigit = parseInt(limitedDigits[2]);
+      
+      if (day < 1 || day > 31) {
+        return limitedDigits.slice(0, 2);
+      }
+      
+      return `${limitedDigits.slice(0, 2)}/${limitedDigits[2]}`;
+    }
+    
+    if (limitedDigits.length === 4) {
+      // Complete format dd/mm
+      const day = parseInt(limitedDigits.slice(0, 2));
+      const month = parseInt(limitedDigits.slice(2, 4));
+      
+      if (day < 1 || day > 31) {
+        return limitedDigits.slice(0, 2);
+      }
+      
+      if (month < 1 || month > 12) {
+        return `${limitedDigits.slice(0, 2)}/0${limitedDigits[2]}`;
+      }
+      
+      return `${limitedDigits.slice(0, 2)}/${limitedDigits.slice(2, 4)}`;
+    }
+    
+    return limitedDigits;
+  };
+
+  const handleBirthdayBlur = () => {
+    const currentValue = formData.birthday;
+    if (currentValue.length === 4 && currentValue.includes('/')) {
+      // Format: "dd/m" -> "dd/0m"
+      const parts = currentValue.split('/');
+      if (parts[1].length === 1) {
+        const monthDigit = parseInt(parts[1]);
+        // Only complete with zero if it's a valid month (1-9)
+        if (monthDigit >= 1 && monthDigit <= 9) {
+          const completedValue = `${parts[0]}/0${parts[1]}`;
+          setFormData(prev => ({ ...prev, birthday: completedValue }));
+        }
+      }
+    }
+  };
+
   const handleInputChange = (name: string, value: string | boolean) => {
-    setFormData(prev => ({ ...prev, [name]: value }));
+    let processedValue = value;
+    
+    // Format birthday input automatically
+    if (name === 'birthday' && typeof value === 'string') {
+      processedValue = formatBirthday(value);
+    }
+    
+    setFormData(prev => ({ ...prev, [name]: processedValue }));
     
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: !validateField(name, value) }));
+      setErrors(prev => ({ ...prev, [name]: !validateField(name, processedValue) }));
     }
   };
 
@@ -102,9 +181,10 @@ export const RegistrationForm = () => {
             </label>
             <input
               type="text"
+              placeholder="Ingresa tu nombre"
               value={formData.name}
               onChange={(e) => handleInputChange('name', e.target.value)}
-              className="w-full px-4 py-2 bg-white rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none"
+              className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
             />
              {errors.name && <span className="text-red-500">*</span>}
           </div>
@@ -115,22 +195,24 @@ export const RegistrationForm = () => {
             </label>
             <input
               type="text"
+              placeholder="Ingresa tu apellido"
               value={formData.lastName}
               onChange={(e) => handleInputChange('lastName', e.target.value)}
-              className="w-full px-4 py-2 bg-white rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none"
+              className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
             />
             {errors.lastName && <span className="text-red-500">*</span>}
           </div>
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
-              Empresa: 
+              Compañia: 
             </label>
             <input
               type="text"
+              placeholder="Compañía"
               value={formData.compain}
               onChange={(e) => handleInputChange('compain', e.target.value)}
-              className="w-full px-4 py-2 bg-white rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none"
+              className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
             /> 
             {errors.compain && <span className="text-red-500">*</span>}
           </div>
@@ -141,9 +223,10 @@ export const RegistrationForm = () => {
             </label>
             <input
               type="text"
+              placeholder="Tu posición o cargo"
               value={formData.role}
               onChange={(e) => handleInputChange('role', e.target.value)}
-              className="w-full px-4 py-2 bg-white rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none"
+              className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
             />
             {errors.role && <span className="text-red-500">*</span>}
           </div>
@@ -154,22 +237,25 @@ export const RegistrationForm = () => {
             </label>
             <input
               type="email"
+              placeholder="tu@correo.com"
               value={formData.email}
               onChange={(e) => handleInputChange('email', e.target.value)}
-              className="w-full px-4 py-2 bg-white rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none"
+              className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
             />
             {errors.email && <span className="text-red-500">*</span>}
           </div>
 
           <div className="flex items-center justify-center gap-5">
-            <label className="block text-white font-medium mb-2">
+            <label className="block text-white font-medium mb-2" title="Fecha de nacimiento">
               ¿Cuándo celebramos contigo?
             </label>
             <input
-              type="date"
+              type="text"
+              placeholder="dd/mm"
               value={formData.birthday}
               onChange={(e) => handleInputChange('birthday', e.target.value)}
-              className="w-full px-4 py-2 bg-white rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none"
+              onBlur={handleBirthdayBlur}
+              className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
             />
              {errors.birthday && <span className="text-red-500">*</span>}
           </div>
