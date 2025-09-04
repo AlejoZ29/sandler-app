@@ -122,7 +122,7 @@ export const MovieGrid: React.FC<MovieGridProps> = ({
       src: "/assets/zookeeper.png",
       alt: "Zookeeper",
       imageName: "zookeeper",
-      className: "absolute top-[20%] left-[47.5%]"
+      className: "absolute top-65 left-355"
     },
     {
       src: "/assets/50firstdates.png",

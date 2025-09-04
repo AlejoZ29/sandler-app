@@ -15,7 +15,7 @@ export const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(({ isMut
   const playSound = () => {
     if (audioRef.current && !isMuted) {
       audioRef.current.currentTime = 0;
-      audioRef.current.play().catch(e => console.log('Audio play failed:', e));
+      audioRef.current.play();
     }
   };
 

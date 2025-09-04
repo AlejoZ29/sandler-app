@@ -4,7 +4,6 @@ import { useGame } from '../../app/context/GameContext';
 import { Backstage } from './Backstage';
 import { SonyLogo } from '../sonylogo/SonyLogo';
 import { Counter } from '../counter/Counter';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 export const Navbar = () => {
@@ -22,11 +21,11 @@ export const Navbar = () => {
 
   return (
     <nav className={getNavbarClasses()}>
-      <Link href={'#'} className="flex item-center mt-10">
+      <div className="flex item-center">
         <SonyLogo />
-      </Link>
+      </div>
 
-      <div className="flex items-center gap-10 -mt-10 mr-10">
+      <div className="flex items-center gap-10 mr-10">
         {isHome && (
           <>
             <Backstage
@@ -38,9 +37,9 @@ export const Navbar = () => {
               isActive={isCounterZero}
             />
 
-            <Link href={'#'} className="relative">
+            <div className="relative">
               <Counter clickedImages={clickedImages} totalImages={totalImages} />
-            </Link>
+            </div>
           </>
         )}
       </div>

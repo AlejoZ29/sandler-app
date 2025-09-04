@@ -35,13 +35,11 @@ const movieNameMapping: { [key: string]: string } = {
 export const getMovieData = (movieName: string): MovieData | null => {
   const mappedName = movieNameMapping[movieName];
   if (!mappedName) {
-    console.log('No mapping found for movie name:', movieName);
     return null;
   }
   
   const movie = movieData.find(movie => movie.nombre === mappedName);
   if (!movie) {
-    console.log('Movie not found in data.json:', mappedName);
     return null;
   }
   

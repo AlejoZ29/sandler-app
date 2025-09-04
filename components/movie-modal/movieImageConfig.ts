@@ -1,11 +1,9 @@
-// Configuración de imágenes para las películas
 export interface MovieImageConfig {
-  movie: string; // Nombre del archivo de imagen del título de la película
-  look: string;  // Nombre del archivo de imagen del look
-  displayName: string; // Nombre para mostrar
+  movie: string;
+  look: string;
+  displayName: string;
 }
 
-// Mapeo de nombres de películas a sus archivos de imagen
 export const movieImageMap: Record<string, MovieImageConfig> = {
   'eightcrazynights': { 
     movie: 'eightcrazynights.png', 
@@ -104,12 +102,10 @@ export const movieImageMap: Record<string, MovieImageConfig> = {
   }
 };
 
-// Función helper para obtener las rutas de imágenes
 export const getMovieImagePaths = (movieKey: string) => {
   const movieConfig = movieImageMap[movieKey];
   
   if (!movieConfig) {
-    // Fallback a zookeeper si no existe la configuración
     return {
       movie: '/assets/movies/zookeeper.png',
       look: '/assets/looks/zookeeper.png',

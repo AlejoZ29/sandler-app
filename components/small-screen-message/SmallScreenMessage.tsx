@@ -2,15 +2,14 @@
 import React, { useState, useEffect } from 'react';
 
 interface SmallScreenMessageProps {
-  showMessage?: boolean; // Parámetro configurable
+  showMessage?: boolean;
 }
 
 export const SmallScreenMessage: React.FC<SmallScreenMessageProps> = ({
-  showMessage = true // Por defecto true
+  showMessage = true 
 }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
-  // Detectar si la pantalla es pequeña
   useEffect(() => {
     const checkScreenSize = () => {
       const small = window.innerWidth < 1366;
@@ -22,19 +21,16 @@ export const SmallScreenMessage: React.FC<SmallScreenMessageProps> = ({
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
-  // Si no es pantalla pequeña o no está habilitado, no mostrar nada
   if (!isSmallScreen || !showMessage) return null;
 
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-sm">
-      {/* Modal Content */}
       <div 
         className="relative w-full h-full shadow-2xl border border-yellow-400/30"
         style={{
           background: 'linear-gradient(to right, #010204, #214457, #0C1115)'
         }}
       >
-        {/* Small Screen Message */}
         <div className="flex items-center justify-center h-full p-8">
           <div className="text-center max-w-md">
             <div className="mb-6">

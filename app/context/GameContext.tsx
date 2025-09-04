@@ -21,7 +21,6 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   const [clickedImages, setClickedImages] = useState<Set<string>>(new Set());
   const totalImages = 19;
 
-  // Load clicked images from localStorage on component mount
   useEffect(() => {
     const savedImages = localStorage.getItem('clickedImages');
     if (savedImages) {
@@ -29,17 +28,12 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
-  // Save clicked images to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem('clickedImages', JSON.stringify(Array.from(clickedImages)));
   }, [clickedImages]);
 
   const handleImageClick = (imageName: string) => {
-    console.log('Context handleImageClick called with:', imageName);
-    
-    // Handle reset signal
     if (imageName === 'RESET_ALL') {
-      console.log('Resetting all images');
       setClickedImages(new Set());
       return;
     }
@@ -48,11 +42,7 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
       const newSet = new Set(prev);
       if (!newSet.has(imageName)) {
         newSet.add(imageName);
-        console.log('Image added to set:', imageName);
-      } else {
-        console.log('Image already in set:', imageName);
       }
-      console.log('New set size:', newSet.size);
       return newSet;
     });
   };

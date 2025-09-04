@@ -14,7 +14,6 @@ interface MovieModalProps {
   clickedImages: Set<string>;
   totalImages: number;
   onClose: (resetMovie?: boolean) => void;
-  onLearnMore: () => void;
 }
 
 export const MovieModal: React.FC<MovieModalProps> = ({
@@ -23,7 +22,6 @@ export const MovieModal: React.FC<MovieModalProps> = ({
   clickedImages,
   totalImages,
   onClose,
-  onLearnMore
 }) => {
   const [movieImageError, setMovieImageError] = useState(false);
   const [lookImageError, setLookImageError] = useState(false);
