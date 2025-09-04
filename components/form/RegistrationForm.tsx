@@ -89,7 +89,7 @@ export const RegistrationForm = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center px-5 md:mx-12 lg:mx-auto lg:grid lg:grid-cols-12">
+    <div className="flex flex-col items-center justify-center px-5 md:mx-12 lg:mx-auto lg:grid lg:grid-cols-12 h-full">
       <div className="col-start-8 col-end-12 lg:mx-auto max-w-[500px]">
         <div className="mb-10 mx-auto flex flex-col justify-center items-center mt-32 md:mt-12 lg:w-[70%]">
           <Logo textClasses="lg:mt-0 text-center"/>
