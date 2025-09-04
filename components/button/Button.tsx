@@ -15,7 +15,7 @@ export const Button = ({classes, variant,disabled, callToAction, textButton}: Bu
       disabled={disabled}
       type="submit"
       onClick={callToAction && callToAction}
-      className={`${classes ? classes : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:from-yellow-300 hover:via-yellow-700 hover:to-yellow-300 hover:scale-105'} w-60 text-white font-medium text-md md:text-xl ${variant === 'primary' ? 'bg-gradient-to-r from-yellow-200 via-yellow-600 to-yellow-200' : 'border-amber-300 border-2 bg-transparent from-yellow-200 via-yellow-600 to-yellow-200'} py-2 md:py-3 px-6 md:px-8 rounded-full shadow-lg transition-all duration-300 transform -mt-5`}
+      className={`${classes ? classes : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:from-yellow-300 hover:via-yellow-700 hover:to-yellow-300 hover:scale-105'}  text-white font-medium text-md md:text-xl ${variant === 'primary' ? 'bg-gradient-to-r from-yellow-200 via-yellow-600 to-yellow-200' : 'border-amber-300 border-2 bg-transparent from-yellow-200 via-yellow-600 to-yellow-200'} py-2 w-60 md:py-2 px-6 md:px-8 rounded-full shadow-lg transition-all duration-300 transform -mt-5`}
     >
       {textButton}
     </button>

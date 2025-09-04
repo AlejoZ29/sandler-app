@@ -33,16 +33,16 @@ export const VerificationFlow = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen md:h-[calc(100vh-145px)]">
+    <div className="flex flex-col items-center justify-center h-full w-full px-4 overflow-hidden">
       <div className={`transition-all duration-500 ease-in-out w-72 lg:w-xl ${isVerifying ? 'transform -translate-y-8 scale-75' : ''}`}>
         <Image
           src="/assets/logo.png"
           width={450}
           height={450}
           alt="Logo Sandlers Show"
-          className="transition-all duration-500 ease-in-out mx-auto w-500 md:w-[350px] lg:w-[450px]"
+          className="transition-all duration-500 ease-in-out mx-auto w-72 md:w-[350px] lg:w-[450px]"
         />
-        <p className={`${isVerifying ? '-mt-2 lg:mt-0 -mb-10' : '-mt-2 lg:mt-0'} text-center mx-auto shadow-amber-300 text-sm lg:text-xl text-white font-medium transition-all duration-500 mt-2 lg:w-[500px]`}>
+        <p className={`${isVerifying ? '-mt-2 lg:mt-0 -mb-10' : '-mt-2 lg:mt-0'} text-center mx-auto shadow-amber-300 text-sm lg:text-xl text-white font-medium transition-all duration-500 mt-2 lg:w-[500px] max-w-full`}>
           {isVerifying
             ? (error || "Ingresa el código para continuar")
             : "Estar a la moda, es tenerlo en tu pantalla"
@@ -51,10 +51,10 @@ export const VerificationFlow = () => {
       </div>
 
       {isVerifying && (
-        <div className="flex flex-col items-center transition-all duration-500 ease-in-out">
+        <div className="flex flex-col items-center transition-all duration-500 ease-in-out mt-4">
           <CodeInput code={code} onChange={handleCodeChange} />
           <Button
-            classes="mt-10"
+            classes="mt-6"
             textButton="Verificar"
             variant="primary"
             disabled={code.length !== 6}
@@ -64,7 +64,7 @@ export const VerificationFlow = () => {
       )}
 
       {!isVerifying && (
-        <Button classes="mt-10" disabled={isVerifying} variant="primary" textButton="Ingresar" callToAction={handleEnterClick} />
+        <Button classes="mt-6" disabled={isVerifying} variant="primary" textButton="Ingresar" callToAction={handleEnterClick} />
       )}
     </div>
   );

@@ -39,22 +39,19 @@ html, body {
   color: var(--foreground);
 }
 
-.page-form {
+/* Clases personalizadas para backgrounds */
+.bg-form-mobile {
   background-image: url('/assets/background-chair.jpg') !important;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
 }
 
+.bg-home {
+  background-image: url('/assets/background-main.jpg') !important;
+}
+
+/* Media query para cambiar background en móvil para la página del formulario */
 @media (max-width: 1024px) {
-  .page-form {
+  .bg-form-mobile {
     background-image: url('/assets/background.jpg') !important;
   }
 }
 
-.page-home {
-  background-image: url('/assets/background-main.jpg') !important;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-}

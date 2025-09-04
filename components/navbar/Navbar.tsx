@@ -14,12 +14,12 @@ export const Navbar = () => {
 
 
   return (
-    <nav className="flex w-full justify-between p-2">
+    <nav className="flex w-full justify-between p-2 md:p-2">
       <div className="flex item-center">
         <SonyLogo />
       </div>
 
-      <div className="flex items-center gap-10">
+      <div className="flex items-center gap-4 md:gap-10">
         {isHome && (
           <>
             <Backstage

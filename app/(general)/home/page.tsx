@@ -70,10 +70,9 @@ export default function HomePage() {
 
 
   return (
-    <div className="relative w-full h-screen overflow-x-hidden overflow-y-hidden">
+    <div className="relative w-full h-screen overflow-hidden">
       <div
-        className="relative w-[3000px] h-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/assets/background-main.jpg')" }}
+        className="relative w-full md:w-[3000px] h-full bg-home bg-cover bg-center bg-no-repeat"
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeave}

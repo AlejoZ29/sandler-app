@@ -1,7 +1,6 @@
 import React from 'react'
 import type { Metadata } from 'next';
 import { RegistrationForm } from '@/components';
-import '../../form-page.css';
 
 export const metadata: Metadata = {
  title: 'Formulario de Registro - The Sandler Style',
@@ -10,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function FormPage() {
   return (
-    <div className="page-form">
+    <div className="w-screen h-screen bg-form-mobile bg-cover bg-center bg-no-repeat pt-52 md:pt-0 mb-32 md:mb-0 overflow-y-auto">
       <RegistrationForm />
     </div>
   )

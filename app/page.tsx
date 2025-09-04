@@ -1,6 +1,5 @@
 import { VerificationFlow } from "@/components/verification/VerificationFlow";
 import type { Metadata } from "next";
-import "./start-page.css";
 
 export const metadata: Metadata = {
   title: 'Start Page',
@@ -9,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="page-start">
+    <div className="w-full h-full overflow-hidden flex items-center justify-center relative">
       <VerificationFlow />
     </div>
   );
