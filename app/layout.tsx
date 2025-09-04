@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Footer, Navbar, SmallScreenMessage } from "@/components";
+import { Footer, Navbar } from "@/components";
 import { GameProvider } from "./context/GameContext";
 
 const geistSans = Geist({
@@ -27,9 +27,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-      </head>
       <body suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased relative`}
       >
@@ -37,11 +34,10 @@ export default function RootLayout({
           <div className="fixed top-0 left-0 w-full z-50">
             <Navbar/>
           </div>
-          <div className="pt-20 flex items-center h-full justify-center">
+          <div className="flex items-center justify-center">
             {children}
           </div>
-          <Footer />
-          <SmallScreenMessage showMessage={true} />
+  <Footer />
         </GameProvider>
       </body>
     </html>

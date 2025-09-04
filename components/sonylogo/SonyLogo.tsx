@@ -5,8 +5,8 @@ export const SonyLogo = () => {
   return (
     <Image
       src="/assets/sony-logo.png"
-      width={80}
-      height={80}
+      width={60}
+      height={60}
       alt="Logo Sandlers Show"
   />
   )

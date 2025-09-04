@@ -15,7 +15,7 @@ export const Logo = ({textClasses}: LogoProps) => {
         alt="Logo Sandlers Show"
         className='mx-auto'
       />
-      <p className={`${textClasses ? textClasses : '-mt-14 lg:-mt-18 text-center'} shadow-amber-300 text-xl lg:text-2xl text-white font-medium'
+      <p className={`${textClasses ? textClasses : '-mt-14 lg:-mt-18 text-center'} shadow-amber-300  md:text-2xl text-white font-medium'
       `}>Estar a la moda, es tenerlo en tu pantalla</p>
     </>
   )

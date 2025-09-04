@@ -12,20 +12,14 @@ export const Navbar = () => {
   const isHome = pathname === '/home';
   const isCounterZero = clickedImages.size === 0;
 
-  const getNavbarClasses = () => {
-    if (isHome) {
-      return "flex w-screen justify-between p-2 bg-black/80 backdrop-blur-sm";
-    }
-    return "flex w-full justify-between p-2 backdrop-blur-sm";
-  };
 
   return (
-    <nav className={getNavbarClasses()}>
+    <nav className="flex w-full justify-between p-2">
       <div className="flex item-center">
         <SonyLogo />
       </div>
 
-      <div className="flex items-center gap-10 mr-10">
+      <div className="flex items-center gap-10">
         {isHome && (
           <>
             <Backstage

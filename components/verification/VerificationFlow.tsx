@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button, CodeInput } from "@/components";
 
-const VALID_CODE = "123456";
+const VALID_CODE = "090966";
 
 export const VerificationFlow = () => {
   const [isVerifying, setIsVerifying] = useState(false);
@@ -33,16 +33,16 @@ export const VerificationFlow = () => {
   };
 
   return (
-    <div className="font-sans flex flex-col items-center justify-center h-full p-8 sm:p-20 overflow-x-hidden">
-      <div className={`transition-all duration-500 ease-in-out w-80 lg:w-xl ${isVerifying ? 'transform -translate-y-8 scale-75' : ''}`}>
+    <div className="flex flex-col items-center justify-center h-screen md:h-[calc(100vh-145px)]">
+      <div className={`transition-all duration-500 ease-in-out w-72 lg:w-xl ${isVerifying ? 'transform -translate-y-8 scale-75' : ''}`}>
         <Image
           src="/assets/logo.png"
           width={450}
           height={450}
           alt="Logo Sandlers Show"
-          className="transition-all duration-500 ease-in-out mx-auto w-500 lg:w-[600px]"
+          className="transition-all duration-500 ease-in-out mx-auto w-500 md:w-[350px] lg:w-[450px]"
         />
-        <p className={`${isVerifying ? '-mt-2 lg:mt-0 -mb-10' : '-mt-2 lg:mt-0'} text-center mx-auto shadow-amber-300 text-sm md:text-xl lg:text-2xl text-white font-medium transition-all duration-500 mt-2 md:w-[500px]`}>
+        <p className={`${isVerifying ? '-mt-2 lg:mt-0 -mb-10' : '-mt-2 lg:mt-0'} text-center mx-auto shadow-amber-300 text-sm lg:text-xl text-white font-medium transition-all duration-500 mt-2 lg:w-[500px]`}>
           {isVerifying
             ? (error || "Ingresa el código para continuar")
             : "Estar a la moda, es tenerlo en tu pantalla"

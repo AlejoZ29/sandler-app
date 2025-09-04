@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="page-start flex items-center h-full justify-center">
+    <div className="page-start">
       <VerificationFlow />
     </div>
   );
