@@ -28,13 +28,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} antialiased relative overflow-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative`}
       >
         <GameProvider>
           <div className="fixed top-0 left-0 w-full z-50">
             <Navbar/>
           </div>
-          <div className="flex flex-col items-center justify-center w-full h-screen overflow-hidden">
+          <div className="flex flex-col items-center justify-center w-full h-screen overflow-x-hidden">
             <div className="flex-1 flex items-center justify-center">
               {children}
             </div>

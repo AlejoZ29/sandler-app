@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function FormPage() {
   return (
-    <div className="w-screen h-screen bg-form-mobile bg-cover bg-center bg-no-repeat pt-52 md:pt-0 mb-32 md:mb-0 overflow-y-auto">
+    <div className="w-screen md:h-screen bg-form-mobile bg-cover bg-center bg-no-repeat pt-52 md:pt-0 mb-32 md:mb-0 overflow-y-auto">
       <RegistrationForm />
     </div>
   )
