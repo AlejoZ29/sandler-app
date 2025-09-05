@@ -7,6 +7,8 @@ import { Overlay, LandscapePrompt } from '@/components';
 import { ControlButtons } from '@/components/controls/Controls';
 import { AudioPlayer, AudioPlayerRef } from '@/components/audio-player/AudioPlayer';
 import { Button } from '@/components/button/Button';
+import { MovieModal } from '@/components/movie-modal/MovieModal';
+import moviesData from '../../data.json';
 
 export default function HomePage() {
   const [isPressed, setIsPressed] = useState(false);
@@ -16,6 +18,11 @@ export default function HomePage() {
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   const audioPlayerRef = useRef<AudioPlayerRef>(null);
   const { clickedImages, handleImageClick } = useGame();
+  
+  // Modal state
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState<string | null>(null);
+  const totalImages = 20; // Número total de películas ocultas
 
   useEffect(() => {
     const hasVisitedBefore = localStorage.getItem('isShowModal');
@@ -66,7 +73,16 @@ export default function HomePage() {
   const handlePolylineClick = (polylineName: string) => {
     if (!clickedImages.has(polylineName)) {
       handleImageClick(polylineName);
-      playSound(); 
+      playSound();
+      setSelectedMovie(polylineName);
+      setModalOpen(true);
+    }
+  };
+
+  const closeModal = (resetMovie?: boolean) => {
+    setModalOpen(false);
+    if (resetMovie) {
+      setSelectedMovie(null);
     }
   };
 
@@ -572,6 +588,14 @@ export default function HomePage() {
           onResetCounter={resetCounter}
         />
       </div>
+
+      <MovieModal
+        isOpen={modalOpen}
+        selectedMovie={selectedMovie}
+        clickedImages={clickedImages}
+        totalImages={totalImages}
+        onClose={closeModal}
+      />
     </div>
   )
 }
