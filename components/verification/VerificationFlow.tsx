@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button, CodeInput } from "@/components";
+import { useAuth } from "@/app/context/AuthContext";
 
 const VALID_CODE = "090966";
 
@@ -11,6 +12,7 @@ export const VerificationFlow = () => {
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const { setVerified } = useAuth();
 
   const handleEnterClick = () => {
     setIsVerifying(true);
@@ -25,6 +27,7 @@ export const VerificationFlow = () => {
 
   const handleVerify = () => {
     if (code === VALID_CODE) {
+      setVerified();
       router.push('/form');
     } else {
       setError("El código que ingresaste no es válido, por favor inténtalo de nuevo");

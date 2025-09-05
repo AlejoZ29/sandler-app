@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Footer, Navbar, BackstageModal } from "@/components";
 import { GameProvider } from "./context/GameContext";
+import { AuthProvider } from "./context/AuthContext";
 import { useState } from "react";
 
 const geistSans = Geist({
@@ -29,15 +30,17 @@ export default function RootLayout({
       <body suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased relative`}
       >
-        <GameProvider>
-          <Navbar onOpenBackstage={() => setBackstageModalOpen(true)} />
-          {children}
-          <Footer />
-          <BackstageModal
-            isOpen={backstageModalOpen}
-            onClose={() => setBackstageModalOpen(false)}
-          />
-        </GameProvider>
+        <AuthProvider>
+          <GameProvider>
+            <Navbar onOpenBackstage={() => setBackstageModalOpen(true)} />
+            {children}
+            <Footer />
+            <BackstageModal
+              isOpen={backstageModalOpen}
+              onClose={() => setBackstageModalOpen(false)}
+            />
+          </GameProvider>
+        </AuthProvider>
       </body>
     </html>
   );

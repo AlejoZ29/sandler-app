@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Logo } from '@/components';
+import { useAuth } from '@/app/context/AuthContext';
 
 interface FormData {
   name: string;
@@ -19,6 +20,7 @@ interface FormErrors {
 
 export const RegistrationForm = () => {
   const router = useRouter();
+  const { setFormCompleted } = useAuth();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     lastName: '',
@@ -163,6 +165,7 @@ export const RegistrationForm = () => {
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (validateForm()) {
+      setFormCompleted();
       router.push('/home');
     }
   };

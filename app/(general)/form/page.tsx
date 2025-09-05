@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Metadata } from 'next';
-import { RegistrationForm } from '@/components';
+import { RegistrationForm, RouteProtection } from '@/components';
 
 export const metadata: Metadata = {
  title: 'Formulario de Registro - The Sandler Style',
@@ -9,8 +9,10 @@ export const metadata: Metadata = {
 
 export default function FormPage() {
   return (
-    <div className="page-form">
-      <RegistrationForm />
-    </div>
+    <RouteProtection requireVerification={true}>
+      <div className="page-form">
+        <RegistrationForm />
+      </div>
+    </RouteProtection>
   )
 }

@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import React, { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { useGame } from '../../context/GameContext';
-import { Overlay, LandscapePrompt, CongratsModal } from '@/components';
+import { Overlay, LandscapePrompt, CongratsModal, RouteProtection } from '@/components';
 import { ControlButtons } from '@/components/controls/Controls';
 import { AudioPlayer, AudioPlayerRef } from '@/components/audio-player/AudioPlayer';
 import { Button } from '@/components/button/Button';
@@ -98,8 +98,9 @@ export default function HomePage() {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden page-home">
-      <LandscapePrompt />
+    <RouteProtection requireFormCompletion={true}>
+      <div className="relative w-full h-screen overflow-hidden page-home">
+        <LandscapePrompt />
 
       {showWelcomeModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -593,6 +594,7 @@ export default function HomePage() {
         totalImages={totalImages}
         onClose={closeCongratModal}
       />
-    </div>
+      </div>
+    </RouteProtection>
   )
 }
