@@ -16,6 +16,9 @@ export const ControlButtons: React.FC<ControlButtonsProps> = ({
   onToggleOverlay,
   onResetCounter
 }) => {
+  // Check if route protection is disabled (development mode)
+  const isDevMode = process.env.NEXT_PUBLIC_DISABLE_ROUTE_PROTECTION === 'true';
+
   return (
     <div className="fixed bottom-6 right-6 flex gap-3 z-[40] mr-32">
       {/* Mute/Unmute Button */}
@@ -50,15 +53,17 @@ export const ControlButtons: React.FC<ControlButtonsProps> = ({
         )}
       </button>
 
-      {/* Reset Counter Button */}
-      <button
-        onClick={onResetCounter}
-        className="w-14 h-14 bg-black/70 hover:bg-black/90 rounded-full flex items-center justify-center transition-all duration-300 border-2 border-yellow-400/50 hover:border-yellow-400"
-      >
-        <svg className="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
-        </svg>
-      </button>
+      {/* Reset Counter Button - Only available in development mode */}
+      {isDevMode && (
+        <button
+          onClick={onResetCounter}
+          className="w-14 h-14 bg-black/70 hover:bg-black/90 rounded-full flex items-center justify-center transition-all duration-300 border-2 border-yellow-400/50 hover:border-yellow-400"
+        >
+          <svg className="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
+          </svg>
+        </button>
+      )}
     </div>
   );
 };
