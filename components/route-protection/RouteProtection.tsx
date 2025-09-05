@@ -17,6 +17,14 @@ export const RouteProtection: React.FC<RouteProtectionProps> = ({
   const { isVerified, isFormCompleted } = useAuth();
   const router = useRouter();
 
+  // Check if route protection is disabled for development
+  const isRouteProtectionDisabled = process.env.NEXT_PUBLIC_DISABLE_ROUTE_PROTECTION === 'true';
+
+  // If route protection is disabled, render children directly
+  if (isRouteProtectionDisabled) {
+    return <>{children}</>;
+  }
+
   useEffect(() => {
     // Si requiere verificación y no está verificado, redirigir al inicio
     if (requireVerification && !isVerified) {

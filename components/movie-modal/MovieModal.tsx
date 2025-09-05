@@ -149,7 +149,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
       />
 
       <div
-        className="relative w-full h-full shadow-2xl border border-yellow-400/30 opacity-60"
+        className="relative w-full h-full shadow-2xl border border-yellow-400/30 opacity-60 overflow-auto"
         style={{
           background: 'linear-gradient(to right, #010204, #214457, #0C1115)'
         }}
@@ -286,7 +286,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
                 </div>
 
                 {/* Botón Continuar */}
-                <div className="flex mt-6">
+                <div className="flex justify-center md:justify-start mt-6 my-6 md:my-0">
                   <Button
                     callToAction={handleContinueClick}
                     classes="px-8 py-3 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-black hover:from-yellow-300 hover:to-yellow-400 transition-all duration-300 font-medium shadow-lg"

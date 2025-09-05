@@ -205,8 +205,6 @@ export const RegistrationForm = () => {
         throw new Error(data.error || 'Error al enviar el formulario');
       }
 
-      // Si el registro es exitoso
-      console.log('Usuario registrado:', data);
       setFormCompleted();
       router.push('/home');
       
@@ -219,8 +217,8 @@ export const RegistrationForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center mx-12 lg:mx-auto lg:grid lg:grid-cols-12">
-      <div className="col-start-8 col-end-12 w-full mx-12 lg:mx-auto max-w-[600px]">
+    <div className="min-h-screen max-h-screen overflow-hidden flex flex-col items-center justify-center mx-12 lg:mx-auto lg:grid lg:grid-cols-12">
+      <div className="col-start-8 col-end-12 w-full mx-12 lg:mx-auto max-w-[600px] h-full max-h-screen overflow-y-auto overflow-x-hidden py-4 flex flex-col justify-center scrollbar-hide">
         <div className="mb-8">
           <Logo textClasses="lg:mt-0 text-center"/>
         </div>
@@ -230,85 +228,98 @@ export const RegistrationForm = () => {
             <label className="block text-white font-medium mb-2">
               Nombre:{showRequiredAsterisk('name') && <span className="text-red-500 ml-1">*</span>}
             </label>
-            <input
-              type="text"
-              placeholder="Ingresa tu nombre"
-              value={formData.name}
-              onChange={(e) => handleInputChange('name', e.target.value)}
-              className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
-            />
-             {errors.name && touched.name && <span className="text-red-500 text-sm mt-1">{errors.name}</span>}
+            <div className="w-full">
+              {errors.name && touched.name && <span className="text-red-500 text-sm block mb-1">{errors.name}</span>}
+              <input
+                type="text"
+                placeholder="Ingresa tu nombre"
+                value={formData.name}
+                onChange={(e) => handleInputChange('name', e.target.value)}
+                className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
+              />
+            </div>
           </div>
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
               Apellido:{showRequiredAsterisk('lastName') && <span className="text-red-500 ml-1">*</span>} 
             </label>
-            <input
-              type="text"
-              placeholder="Ingresa tu apellido"
-              value={formData.lastName}
-              onChange={(e) => handleInputChange('lastName', e.target.value)}
-              className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
-            />
-            {errors.lastName && touched.lastName && <span className="text-red-500 text-sm mt-1">{errors.lastName}</span>}
+            <div className="w-full">
+              {errors.lastName && touched.lastName && <span className="text-red-500 text-sm block mb-1">{errors.lastName}</span>}
+              <input
+                type="text"
+                placeholder="Ingresa tu apellido"
+                value={formData.lastName}
+                onChange={(e) => handleInputChange('lastName', e.target.value)}
+                className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
+              />
+            </div>
           </div>
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
               Compañia:{showRequiredAsterisk('compain') && <span className="text-red-500 ml-1">*</span>} 
             </label>
-            <input
-              type="text"
-              placeholder="Compañía"
-              value={formData.compain}
-              onChange={(e) => handleInputChange('compain', e.target.value)}
-              className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
-            /> 
-            {errors.compain && touched.compain && <span className="text-red-500 text-sm mt-1">{errors.compain}</span>}
+            <div className="w-full">
+              {errors.compain && touched.compain && <span className="text-red-500 text-sm block mb-1">{errors.compain}</span>}
+              <input
+                type="text"
+                placeholder="Compañía"
+                value={formData.compain}
+                onChange={(e) => handleInputChange('compain', e.target.value)}
+                className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
+              /> 
+            </div>
           </div>
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
               Cargo:{showRequiredAsterisk('role') && <span className="text-red-500 ml-1">*</span>} 
             </label>
-            <input
-              type="text"
-              placeholder="Tu posición o cargo"
-              value={formData.role}
-              onChange={(e) => handleInputChange('role', e.target.value)}
-              className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
-            />
-            {errors.role && touched.role && <span className="text-red-500 text-sm mt-1">{errors.role}</span>}
+            <div className="w-full">
+              {errors.role && touched.role && <span className="text-red-500 text-sm block mb-1">{errors.role}</span>}
+              <input
+                type="text"
+                placeholder="Tu posición o cargo"
+                value={formData.role}
+                onChange={(e) => handleInputChange('role', e.target.value)}
+                className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
+              />
+            </div>
           </div>
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
               Email:{showRequiredAsterisk('email') && <span className="text-red-500 ml-1">*</span>} 
             </label>
-            <input
-              type="email"
-              placeholder="tu@correo.com"
-              value={formData.email}
-              onChange={(e) => handleInputChange('email', e.target.value)}
-              className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
-            />
-            {errors.email && touched.email && <span className="text-red-500 text-sm mt-1">{errors.email}</span>}
+            <div className="w-full">
+              {errors.email && touched.email && <span className="text-red-500 text-sm block mb-1">{errors.email}</span>}
+              <input
+                type="email"
+                placeholder="tu@correo.com"
+                value={formData.email}
+                onChange={(e) => handleInputChange('email', e.target.value)}
+                className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
+              />
+            </div>
           </div>
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2" title="Fecha de nacimiento">
               ¿Cuándo celebramos contigo?{showRequiredAsterisk('birthday') && <span className="text-red-500 ml-1">*</span>}
+             <span className="block text-white text-sm">Fecha de cumpleaños</span>
             </label>
-            <input
-              type="text"
-              placeholder="dd/mm"
-              value={formData.birthday}
-              onChange={(e) => handleInputChange('birthday', e.target.value)}
-              onBlur={handleBirthdayBlur}
-              className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
-            />
-             {errors.birthday && touched.birthday && <span className="text-red-500 text-sm mt-1">{errors.birthday}</span>}
+            <div className="w-full">
+              {errors.birthday && touched.birthday && <span className="text-red-500 text-sm block mb-1">{errors.birthday}</span>}
+              <input
+                type="text"
+                placeholder="dd/mm"
+                value={formData.birthday}
+                onChange={(e) => handleInputChange('birthday', e.target.value)}
+                onBlur={handleBirthdayBlur}
+                className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
+              />
+            </div>
           </div>
 
           <div className="flex items-start space-x-2">
@@ -329,7 +340,7 @@ export const RegistrationForm = () => {
                 Ver política completa aquí
               </a>
             </label>
-            {errors.policy && touched.policy && <span className="text-red-500 text-sm mt-1 block">{errors.policy}</span>}
+            {errors.policy && touched.policy && <span className="text-red-500 text-sm mb-2 block">{errors.policy}</span>}
           </div>
           {/* Error de envío */}
           {submitError && (
