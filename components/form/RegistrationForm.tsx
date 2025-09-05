@@ -3,25 +3,16 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Logo } from '@/components';
 import { useAuth } from '@/app/context/AuthContext';
-
-interface FormData {
-  name: string;
-  lastName: string;
-  compain: string;
-  role: string;
-  email: string;
-  birthday: string;
-  policy: boolean;
-}
+import { registrationSchema, type RegistrationFormData } from '@/lib/validationSchemas';
 
 interface FormErrors {
-  [key: string]: boolean;
+  [key: string]: string;
 }
 
 export const RegistrationForm = () => {
   const router = useRouter();
   const { setFormCompleted } = useAuth();
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<RegistrationFormData>({
     name: '',
     lastName: '',
     compain: '',
@@ -32,6 +23,7 @@ export const RegistrationForm = () => {
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState<{[key: string]: boolean}>({});
 
   const validateField = (name: string, value: string | boolean) => {
     switch (name) {
@@ -54,9 +46,6 @@ export const RegistrationForm = () => {
     }
   };
 
-  useEffect(() => {
-    validateForm()
-  }, [formData])
 
   const formatBirthday = (value: string) => {
     // Remove all non-digits
@@ -128,7 +117,7 @@ export const RegistrationForm = () => {
     }
   };
 
-  const handleInputChange = (name: string, value: string | boolean) => {
+  const handleInputChange = (name: keyof RegistrationFormData, value: string | boolean) => {
     let processedValue = value;
     
     // Format birthday input automatically
@@ -136,37 +125,76 @@ export const RegistrationForm = () => {
       processedValue = formatBirthday(value);
     }
     
-    setFormData(prev => ({ ...prev, [name]: processedValue }));
+    setFormData(prev => ({ ...prev, [name]: processedValue } as RegistrationFormData));
     
+    // Mark field as touched
+    setTouched(prev => ({ ...prev, [name]: true }));
+    
+    // Clear error for this field when user types
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: !validateField(name, processedValue) }));
+      setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
-  const validateForm = () => {
-    const newErrors: FormErrors = {};
-    Object.keys(formData).forEach(key => {
-      const value = formData[key as keyof FormData];
-      if (!validateField(key, value)) {
-        newErrors[key] = true;
+  const validateForm = async (): Promise<boolean> => {
+    try {
+      await registrationSchema.validate(formData, { abortEarly: false });
+      setErrors({});
+      return true;
+    } catch (error: any) {
+      const validationErrors: FormErrors = {};
+      
+      if (error.inner) {
+        error.inner.forEach((err: any) => {
+          if (err.path) {
+            validationErrors[err.path] = err.message;
+          }
+        });
       }
-    });
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+      
+      setErrors(validationErrors);
+      return false;
+    }
   };
 
-  const isFormValid = () => {
-    return Object.keys(formData).every(key => {
-      const value = formData[key as keyof FormData];
-      return validateField(key, value);
-    });
-  };
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
-  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (validateForm()) {
+  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    if (!(await validateForm())) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Error al enviar el formulario');
+      }
+
+      // Si el registro es exitoso
+      console.log('Usuario registrado:', data);
       setFormCompleted();
       router.push('/home');
+      
+    } catch (error) {
+      console.error('Error en el registro:', error);
+      setSubmitError(error instanceof Error ? error.message : 'Error al enviar el formulario');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -189,7 +217,7 @@ export const RegistrationForm = () => {
               onChange={(e) => handleInputChange('name', e.target.value)}
               className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
             />
-             {errors.name && <span className="text-red-500">*</span>}
+             {errors.name && touched.name && <span className="text-red-500 text-sm mt-1">{errors.name}</span>}
           </div>
 
           <div className="flex items-center justify-center gap-5">
@@ -203,7 +231,7 @@ export const RegistrationForm = () => {
               onChange={(e) => handleInputChange('lastName', e.target.value)}
               className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
             />
-            {errors.lastName && <span className="text-red-500">*</span>}
+            {errors.lastName && touched.lastName && <span className="text-red-500 text-sm mt-1">{errors.lastName}</span>}
           </div>
 
           <div className="flex items-center justify-center gap-5">
@@ -217,7 +245,7 @@ export const RegistrationForm = () => {
               onChange={(e) => handleInputChange('compain', e.target.value)}
               className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
             /> 
-            {errors.compain && <span className="text-red-500">*</span>}
+            {errors.compain && touched.compain && <span className="text-red-500 text-sm mt-1">{errors.compain}</span>}
           </div>
 
           <div className="flex items-center justify-center gap-5">
@@ -231,7 +259,7 @@ export const RegistrationForm = () => {
               onChange={(e) => handleInputChange('role', e.target.value)}
               className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
             />
-            {errors.role && <span className="text-red-500">*</span>}
+            {errors.role && touched.role && <span className="text-red-500 text-sm mt-1">{errors.role}</span>}
           </div>
 
           <div className="flex items-center justify-center gap-5">
@@ -245,7 +273,7 @@ export const RegistrationForm = () => {
               onChange={(e) => handleInputChange('email', e.target.value)}
               className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
             />
-            {errors.email && <span className="text-red-500">*</span>}
+            {errors.email && touched.email && <span className="text-red-500 text-sm mt-1">{errors.email}</span>}
           </div>
 
           <div className="flex items-center justify-center gap-5">
@@ -260,7 +288,7 @@ export const RegistrationForm = () => {
               onBlur={handleBirthdayBlur}
               className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
             />
-             {errors.birthday && <span className="text-red-500">*</span>}
+             {errors.birthday && touched.birthday && <span className="text-red-500 text-sm mt-1">{errors.birthday}</span>}
           </div>
 
           <div className="flex items-start space-x-2">
@@ -281,12 +309,20 @@ export const RegistrationForm = () => {
                 Ver política completa aquí
               </a>
             </label>
-            {errors.policy && <span className="text-red-500">*</span>}
+            {errors.policy && touched.policy && <span className="text-red-500 text-sm mt-1 block">{errors.policy}</span>}
           </div>
+          {/* Error de envío */}
+          {submitError && (
+            <div className="text-red-500 text-sm text-center bg-red-100 p-3 rounded-lg border">
+              {submitError}
+            </div>
+          )}
+
           <div className="pt-4 flex flex-col items-center mt-10">
             <Button 
-              textButton="Enviar" 
-              disabled={!isFormValid()}
+              textButton={isSubmitting ? "Enviando..." : "Enviar"} 
+              disabled={isSubmitting}
+              callToAction={() => {}}
             />
           </div>
         </form>
