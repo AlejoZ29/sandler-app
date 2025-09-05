@@ -398,16 +398,16 @@ export default function HomePage() {
             className="transition-opacity duration-300"
           />
         )}
-        {!clickedImages.has('zohan') ? (
+        {!clickedImages.has('youdontmesswiththezohan') ? (
           <polyline 
-            name='zohan' 
+            name='youdontmesswiththezohan' 
             points="1133,696,1136,706,1119,710,1111,723,1109,735,1131,730,1150,730,1167,733,1180,735,1200,732,1209,718,1226,710,1212,696,1195,696,1189,682,1165,686,1144,689" 
             fill="none"
             stroke="transparent"
             strokeWidth="3"
             className="polyline-hover"
             onMouseEnter={playSound}
-            onClick={() => handlePolylineClick('zohan')}
+            onClick={() => handlePolylineClick('youdontmesswiththezohan')}
           />
         ) : (
           <circle
@@ -552,16 +552,16 @@ export default function HomePage() {
             className="transition-opacity duration-300"
           />
         )}
-        {!clickedImages.has('golpebajo') ? (
+        {!clickedImages.has('thelongestyard') ? (
           <polyline 
-            name='golpebajo' 
+            name='thelongestyard' 
             points="1373,832,1345,830,1309,827,1287,815,1273,791,1265,760,1273,738,1294,723,1317,715,1340,718,1365,730,1379,743,1384,757,1380,772,1389,779,1397,793,1392,806,1389,821" 
             fill="none"
             stroke="transparent"
             strokeWidth="3"
             className="polyline-hover"
             onMouseEnter={playSound}
-            onClick={() => handlePolylineClick('golpebajo')}
+            onClick={() => handlePolylineClick('thelongestyard')}
           />
         ) : (
           <circle

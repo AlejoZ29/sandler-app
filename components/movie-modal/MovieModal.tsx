@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components';
 import { Counter } from '@/components/counter/Counter';
-import { useRouter } from 'next/navigation';
 import moviesData from '@/app/data.json';
 
 interface MovieModalProps {
@@ -23,7 +22,6 @@ export const MovieModal: React.FC<MovieModalProps> = ({
 }) => {
   const [movieImageError, setMovieImageError] = useState(false);
   const [lookImageError, setLookImageError] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     if (selectedMovie) {
@@ -75,17 +73,16 @@ export const MovieModal: React.FC<MovieModalProps> = ({
       'hoteltransylvania': 'Hotel Transylvania',
       'grownups': 'Grown Ups',
       'jackandjill': 'Jack and Jill',
-      'thatsmyboy': "That's My Boy",
+      'thatsmyboy': "Thats My Boy",
       'reignoverme': 'Reign Over Me',
-      'zohan': "You Don't Mess with the Zohan",
+      'youdontmesswiththezohan': "You Dont Mess with the Zohan",
       'punchdrunkloveme': 'Punch-Drunk Love',
       '50firstdates': '50 First Dates',
       'pixels': 'Pixels',
       'eightcrazynights': "Adam Sandler's Eight Crazy Nights",
       'angrymanager': 'Anger Management',
       'justgowithit': 'Just Go With It',
-      'golpebajo': 'The Longest Yard',
-      'polyline1': 'Big Daddy' // Mapeo adicional si es necesario
+      'thelongestyard': 'The Longest Yard',
     };
 
     const actualMovieName = movieNameMap[movieName] || movieName;
@@ -108,14 +105,14 @@ export const MovieModal: React.FC<MovieModalProps> = ({
       'jackandjill': '/assets/looks/jackandjill.png',
       'thatsmyboy': '/assets/looks/thatsmyboy.png',
       'reignoverme': '/assets/looks/reignoverme.png',
-      'zohan': '/assets/looks/zohan.png',
+      'youdontmesswiththezohan': '/assets/looks/youdontmesswiththezohan.png',
       'punchdrunkloveme': '/assets/looks/punchdrunklove.png',
       '50firstdates': '/assets/looks/50firstdatesates.png',
       'pixels': '/assets/looks/pixels.png',
       'eightcrazynights': '/assets/looks/eightcrazynights.png',
       'angrymanager': '/assets/looks/angrymanager.png',
       'justgowithit': '/assets/looks/justgowithit.png',
-      'golpebajo': '/assets/looks/thelongestyard.png',
+      'thelongestyard': '/assets/looks/thelongestyard.png',
       'polyline1': '/assets/looks/biddaddy.png'
     };
 

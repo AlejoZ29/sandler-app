@@ -77,9 +77,9 @@
         "name": "The Longest Yard",
         "trailer": "https://www.youtube.com/watch?v=l1BF53bXP8I",
         "synopsis": "Paul Crewe, un exjugador de la NFL, es detenido y enviado a prisión. Allí se verá obligado a convertir a un variado grupo de presos en un equipo que tendrá que jugar contra los guardias del centro.",
-        "poster": "/assets/posters/longestyard.png",
+        "poster": "/assets/posters/thelongestyard.png",
         "release": "27 de mayo del 2005",
-        "logo": "/assets/movies/longestyard.svg"
+        "logo": "/assets/movies/thelongestyard.svg"
     },
     {
         "name": "Mr. Deeds",
@@ -130,7 +130,7 @@
         "logo": "/assets/movies/spanglish.svg"
     },
     {
-        "name": "That’s My Boy",
+        "name": "Thats My Boy",
         "trailer": " https://www.youtube.com/watch?v=SSDzVO_5NhU",
         "synopsis": "Donny tuvo a su hijo Todd cuando era un adolescente y lo crió como padre soltero hasta que cumplió 18 años. Tras años sin verse, el mundo de Todd se colapsa cuando Donny reaparece justo antes de su boda.",
         "poster": "/assets/posters/thatsmyboy.png",
@@ -138,7 +138,7 @@
         "logo": "/assets/movies/thatsmyboy.svg"
     },
     {
-        "name": "You Don’t Mess with the Zohan",
+        "name": "You Dont Mess with the Zohan",
         "trailer": "https://www.youtube.com/watch?v=ucmnTmYpGhI",
         "synopsis": "Sandler interpreta a Zohan, un comando israelí que finge su propia muerte para perseguir su sueño: convertirse en peluquero en Nueva York.",
         "poster": "/assets/posters/youdontmesswiththezohan.png",
