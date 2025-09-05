@@ -1,9 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
 import { registrationSchema } from '@/lib/validationSchemas';
+import { ValidationError } from 'yup';
+
+type YupError = ValidationError & {
+  inner?: { path?: string; message: string }[];
+};
 
 export async function POST(request: NextRequest) {
   try {
+    // Dynamic import to avoid build issues
+    const { default: prisma } = await import('@/lib/prisma');
     const body = await request.json();
     
     // Validar datos usando Yup
@@ -62,10 +68,10 @@ export async function POST(request: NextRequest) {
     console.error('Error al registrar usuario:', error);
     
     // Manejar errores de validación de Yup
-    if (error instanceof Error && error.name === 'ValidationError') {
-      const validationError = error as any;
-      const errors = validationError.inner?.length > 0 
-        ? validationError.inner.map((err: any) => `${err.path}: ${err.message}`).join(', ')
+    if (error instanceof ValidationError) {
+      const validationError = error as YupError;
+      const errors = validationError.inner?.length 
+        ? validationError.inner.map((err) => `${err.path || 'unknown'}: ${err.message}`).join(', ')
         : validationError.message;
       
       return NextResponse.json(

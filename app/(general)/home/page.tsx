@@ -1,18 +1,15 @@
 'use client';
-import type { Metadata } from 'next';
 import React, { useState, useRef, useEffect } from 'react'
-import Image from 'next/image'
 import { useGame } from '../../context/GameContext';
 import { Overlay, LandscapePrompt, CongratsModal, RouteProtection } from '@/components';
 import { ControlButtons } from '@/components/controls/Controls';
 import { AudioPlayer, AudioPlayerRef } from '@/components/audio-player/AudioPlayer';
 import { Button } from '@/components/button/Button';
 import { MovieModal } from '@/components/movie-modal/MovieModal';
-import moviesData from '../../data.json';
 
 export default function HomePage() {
   const [isPressed, setIsPressed] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  // const audioRef = useRef<HTMLAudioElement>(null); // Unused for now
   const [overlayEnabled, setOverlayEnabled] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);

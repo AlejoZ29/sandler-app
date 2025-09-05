@@ -1,9 +1,14 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Logo } from '@/components';
 import { useAuth } from '@/app/context/AuthContext';
 import { registrationSchema, type RegistrationFormData } from '@/lib/validationSchemas';
+import { ValidationError } from 'yup';
+
+type YupError = ValidationError & {
+  inner?: { path?: string; message: string }[];
+};
 
 interface FormErrors {
   [key: string]: string;
@@ -25,26 +30,26 @@ export const RegistrationForm = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<{[key: string]: boolean}>({});
 
-  const validateField = (name: string, value: string | boolean) => {
-    switch (name) {
-      case 'name':
-      case 'lastName':
-        return typeof value === 'string' && /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(value) && value.trim().length > 0;
-      case 'compain':
-      case 'role':
-        return typeof value === 'string' && value.trim().length > 0;
-      case 'email':
-        return typeof value === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-      case 'birthday':
-        if (typeof value !== 'string') return false;
-        const birthdayRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])$/;
-        return birthdayRegex.test(value.trim());
-      case 'policy':
-        return value === true;
-      default:
-        return true;
-    }
-  };
+  // const validateField = (name: string, value: string | boolean) => {
+  //   switch (name) {
+  //     case 'name':
+  //     case 'lastName':
+  //       return typeof value === 'string' && /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(value) && value.trim().length > 0;
+  //     case 'compain':
+  //     case 'role':
+  //       return typeof value === 'string' && value.trim().length > 0;
+  //     case 'email':
+  //       return typeof value === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  //     case 'birthday':
+  //       if (typeof value !== 'string') return false;
+  //       const birthdayRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])$/;
+  //       return birthdayRegex.test(value.trim());
+  //     case 'policy':
+  //       return value === true;
+  //     default:
+  //       return true;
+  //   }
+  // };
 
 
   const formatBirthday = (value: string) => {
@@ -73,7 +78,7 @@ export const RegistrationForm = () => {
     if (limitedDigits.length === 3) {
       // Day complete, starting month
       const day = parseInt(limitedDigits.slice(0, 2));
-      const monthDigit = parseInt(limitedDigits[2]);
+      // const monthDigit = parseInt(limitedDigits[2]); // Unused variable
       
       if (day < 1 || day > 31) {
         return limitedDigits.slice(0, 2);
@@ -141,15 +146,18 @@ export const RegistrationForm = () => {
       await registrationSchema.validate(formData, { abortEarly: false });
       setErrors({});
       return true;
-    } catch (error: any) {
+    } catch (error: unknown) {
       const validationErrors: FormErrors = {};
       
-      if (error.inner) {
-        error.inner.forEach((err: any) => {
-          if (err.path) {
-            validationErrors[err.path] = err.message;
-          }
-        });
+      if (error instanceof ValidationError) {
+        const yupError = error as YupError;
+        if (yupError.inner) {
+          yupError.inner.forEach((err) => {
+            if (err.path) {
+              validationErrors[err.path] = err.message;
+            }
+          });
+        }
       }
       
       setErrors(validationErrors);
