@@ -148,6 +148,7 @@ export const RegistrationForm = () => {
       return true;
     } catch (error: unknown) {
       const validationErrors: FormErrors = {};
+      const touchedFields: {[key: string]: boolean} = {};
       
       if (error instanceof ValidationError) {
         const yupError = error as YupError;
@@ -155,18 +156,29 @@ export const RegistrationForm = () => {
           yupError.inner.forEach((err) => {
             if (err.path) {
               validationErrors[err.path] = err.message;
+              touchedFields[err.path] = true; // Marcar campo como tocado
             }
           });
         }
       }
       
       setErrors(validationErrors);
+      // Marcar todos los campos con errores como tocados
+      setTouched(prevTouched => ({
+        ...prevTouched,
+        ...touchedFields
+      }));
       return false;
     }
   };
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
+
+  // Helper function to show asterisk for required fields with errors
+  const showRequiredAsterisk = (fieldName: string): boolean => {
+    return !!(errors[fieldName] && touched[fieldName]);
+  };
 
   const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -216,7 +228,7 @@ export const RegistrationForm = () => {
         <form className="w-full max-w space-y-4" onSubmit={handleSubmit}>
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
-              Nombre:
+              Nombre:{showRequiredAsterisk('name') && <span className="text-red-500 ml-1">*</span>}
             </label>
             <input
               type="text"
@@ -230,7 +242,7 @@ export const RegistrationForm = () => {
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
-              Apellido: 
+              Apellido:{showRequiredAsterisk('lastName') && <span className="text-red-500 ml-1">*</span>} 
             </label>
             <input
               type="text"
@@ -244,7 +256,7 @@ export const RegistrationForm = () => {
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
-              Compañia: 
+              Compañia:{showRequiredAsterisk('compain') && <span className="text-red-500 ml-1">*</span>} 
             </label>
             <input
               type="text"
@@ -258,7 +270,7 @@ export const RegistrationForm = () => {
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
-              Cargo: 
+              Cargo:{showRequiredAsterisk('role') && <span className="text-red-500 ml-1">*</span>} 
             </label>
             <input
               type="text"
@@ -272,7 +284,7 @@ export const RegistrationForm = () => {
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
-              Email: 
+              Email:{showRequiredAsterisk('email') && <span className="text-red-500 ml-1">*</span>} 
             </label>
             <input
               type="email"
@@ -286,7 +298,7 @@ export const RegistrationForm = () => {
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2" title="Fecha de nacimiento">
-              ¿Cuándo celebramos contigo?
+              ¿Cuándo celebramos contigo?{showRequiredAsterisk('birthday') && <span className="text-red-500 ml-1">*</span>}
             </label>
             <input
               type="text"
@@ -307,7 +319,7 @@ export const RegistrationForm = () => {
               className="mt-1"
             />
             <label className="text-white text-sm">
-              Al continuar, aceptas nuestra política de tratamiento de datos.{' '}
+              Al continuar, aceptas nuestra política de tratamiento de datos.{showRequiredAsterisk('policy') && <span className="text-red-500 ml-1">*</span>}{' '}
               <a 
                 href="https://intl.sonypictures.com/es/privacy-policy" 
                 target="_blank" 
