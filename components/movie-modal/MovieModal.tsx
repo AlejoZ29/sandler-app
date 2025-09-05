@@ -113,7 +113,6 @@ export const MovieModal: React.FC<MovieModalProps> = ({
       'angrymanager': '/assets/looks/angrymanager.png',
       'justgowithit': '/assets/looks/justgowithit.png',
       'thelongestyard': '/assets/looks/thelongestyard.png',
-      'polyline1': '/assets/looks/biddaddy.png'
     };
 
     return lookFileMap[movieName] || '/assets/looks/zookeeper.png';

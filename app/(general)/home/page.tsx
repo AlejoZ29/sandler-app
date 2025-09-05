@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import React, { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { useGame } from '../../context/GameContext';
-import { Overlay, LandscapePrompt } from '@/components';
+import { Overlay, LandscapePrompt, CongratsModal } from '@/components';
 import { ControlButtons } from '@/components/controls/Controls';
 import { AudioPlayer, AudioPlayerRef } from '@/components/audio-player/AudioPlayer';
 import { Button } from '@/components/button/Button';
@@ -22,7 +22,8 @@ export default function HomePage() {
   // Modal state
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState<string | null>(null);
-  const totalImages = 20; // Número total de películas ocultas
+  const [congratsModalOpen, setCongratModalOpen] = useState(false);
+  const totalImages = 19; // Número total de películas ocultas
 
   useEffect(() => {
     const hasVisitedBefore = localStorage.getItem('isShowModal');
@@ -74,8 +75,14 @@ export default function HomePage() {
     if (!clickedImages.has(polylineName)) {
       handleImageClick(polylineName);
       playSound();
-      setSelectedMovie(polylineName);
-      setModalOpen(true);
+      
+      // Si después de agregar esta imagen tenemos exactamente 10, mostrar CongratsModal
+      if (clickedImages.size + 1 === 10) {
+        setCongratModalOpen(true);
+      } else {
+        setSelectedMovie(polylineName);
+        setModalOpen(true);
+      }
     }
   };
 
@@ -84,6 +91,10 @@ export default function HomePage() {
     if (resetMovie) {
       setSelectedMovie(null);
     }
+  };
+
+  const closeCongratModal = () => {
+    setCongratModalOpen(false);
   };
 
   return (
@@ -135,27 +146,6 @@ export default function HomePage() {
         
 
         
-        {!clickedImages.has('polyline1') ? (
-          <polyline 
-            points="1138,539,1141,524,1155,524,1163,546,1175,641,1148,615,1129,627,1129,551" 
-            fill="none"
-            stroke="transparent"
-            strokeWidth="3"
-            className="polyline-hover"
-            onMouseEnter={playSound}
-            onClick={() => handlePolylineClick('polyline1')}
-          />
-        ) : (
-          <circle
-            cx="1152"
-            cy="583"
-            r="12"
-            fill="#fef3c7"
-            filter="blur(1px)"
-            opacity={overlayEnabled ? "0.8" : "0"}
-            className="transition-opacity duration-300"
-          />
-        )}
         {!clickedImages.has('bigdaddy') ? (
           <polyline 
             name='bigdaddy' 
@@ -595,6 +585,13 @@ export default function HomePage() {
         clickedImages={clickedImages}
         totalImages={totalImages}
         onClose={closeModal}
+      />
+
+      <CongratsModal
+        isOpen={congratsModalOpen}
+        clickedImages={clickedImages}
+        totalImages={totalImages}
+        onClose={closeCongratModal}
       />
     </div>
   )
