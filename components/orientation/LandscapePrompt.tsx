@@ -19,7 +19,7 @@ export const LandscapePrompt: React.FC<LandscapePromptProps> = ({
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center landscape-prompt">
       <div className="text-center text-white p-8 max-w-sm mx-4">
-        {/* Ícono de rotación */}
+
         <div className="mb-6 flex justify-center">
           <svg 
             width="80" 
@@ -39,7 +39,7 @@ export const LandscapePrompt: React.FC<LandscapePromptProps> = ({
           </svg>
         </div>
         
-        {/* Mensaje */}
+
         <h2 className="text-2xl font-bold mb-4 text-yellow-400">
           ¡Mejor experiencia en horizontal!
         </h2>
@@ -47,9 +47,8 @@ export const LandscapePrompt: React.FC<LandscapePromptProps> = ({
           Rota tu dispositivo para disfrutar de una experiencia óptima
         </p>
         
-        {/* Indicador visual de rotación */}
+
         <div className="flex justify-center items-center space-x-2 text-sm opacity-75">
-          <span>📱</span>
           <svg 
             width="20" 
             height="20" 
@@ -59,7 +58,6 @@ export const LandscapePrompt: React.FC<LandscapePromptProps> = ({
           >
             <path d="M12 2v4m0 12v4m10-10h-4M6 12H2m15.07-5.07l-2.83 2.83M9.76 14.24l-2.83 2.83M17.07 17.07l-2.83-2.83M9.76 9.76L6.93 6.93"/>
           </svg>
-          <span>📱</span>
         </div>
       </div>
     </div>

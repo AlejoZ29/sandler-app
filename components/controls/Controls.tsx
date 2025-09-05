@@ -17,7 +17,7 @@ export const ControlButtons: React.FC<ControlButtonsProps> = ({
   onResetCounter
 }) => {
   return (
-    <div className="fixed bottom-6 right-6 flex gap-3 z-[1000] mr-32">
+    <div className="fixed bottom-6 right-6 flex gap-3 z-[40] mr-32">
       {/* Mute/Unmute Button */}
       <button
         onClick={onToggleMute}

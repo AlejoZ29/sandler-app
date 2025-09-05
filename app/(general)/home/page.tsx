@@ -1,19 +1,33 @@
 'use client';
 import type { Metadata } from 'next';
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { useGame } from '../../context/GameContext';
 import { Overlay, LandscapePrompt } from '@/components';
 import { ControlButtons } from '@/components/controls/Controls';
 import { AudioPlayer, AudioPlayerRef } from '@/components/audio-player/AudioPlayer';
+import { Button } from '@/components/button/Button';
 
 export default function HomePage() {
   const [isPressed, setIsPressed] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [overlayEnabled, setOverlayEnabled] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   const audioPlayerRef = useRef<AudioPlayerRef>(null);
   const { clickedImages, handleImageClick } = useGame();
+
+  useEffect(() => {
+    const hasVisitedBefore = localStorage.getItem('isShowModal');
+    if (!hasVisitedBefore) {
+      setShowWelcomeModal(true);
+    }
+  }, []);
+
+  const handleWelcomeContinue = () => {
+    localStorage.setItem('isShowModal', 'true');
+    setShowWelcomeModal(false);
+  };
 
   const handleMouseDown = () => {
     setIsPressed(true);
@@ -59,6 +73,33 @@ export default function HomePage() {
   return (
     <div className="relative w-full h-screen overflow-hidden page-home">
       <LandscapePrompt />
+
+      {showWelcomeModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+
+          <div className="absolute inset-0" />
+          
+          <div className="relative bg-gradient-to-b from-[#010B14] via-[#0F334B] to-blue-950 rounded-2xl p-8 mx-4 h-[400px] shadow-2xl">
+            <div className="text-center text-white flex flex-col items-center justify-center h-full">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-yellow-300 w-6/12 mx-auto">
+                Bienvenido al Closet<br />de Adam Sandler
+              </h2>
+              <p className="text-base md:text-lg mb-4 leading-relaxed w-8/12 mx-auto">
+                Descubre mínimo 10 objetos ocultos de sus películas más famosas usando el puntero.
+              </p>
+              <p className="text-base md:text-lg mb-8 leading-relaxed w-8/12 mx-auto">
+                Desbloquea las looks inspirados en su estilo icónico y conoce más sobre los títulos destacados.
+              </p>
+              <Button
+                textButton="Continuar"
+                callToAction={handleWelcomeContinue}
+                classes="mx-auto mt-5"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+      
       <Overlay overlayEnabled={overlayEnabled} isPressed={isPressed} />
       <svg 
         viewBox="0 0 1920 1080" 
