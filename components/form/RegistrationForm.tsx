@@ -62,8 +62,8 @@ export const RegistrationForm = () => {
     if (limitedDigits.length === 0) return '';
     
     if (limitedDigits.length === 1) {
-      // Single digit - add leading zero
-      return `0${limitedDigits}`;
+      // Single digit - return as is
+      return limitedDigits;
     }
     
     if (limitedDigits.length === 2) {
