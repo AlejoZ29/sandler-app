@@ -1,3 +1,4 @@
+export * from './backstage-modal/BackstageModal'
 export * from './footer/Footer';
 export * from './logo/Logo'
 export * from './button/Button'

@@ -6,7 +6,11 @@ import { SonyLogo } from '../sonylogo/SonyLogo';
 import { Counter } from '../counter/Counter';
 import { usePathname } from 'next/navigation';
 
-export const Navbar = () => {
+interface NavbarProps {
+  onOpenBackstage?: () => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ onOpenBackstage }) => {
   const { clickedImages, totalImages } = useGame();
   const pathname = usePathname();
   const isHome = pathname === '/home';
@@ -23,12 +27,12 @@ export const Navbar = () => {
         {isHome && (
           <>
             <Backstage
-              href="#"
               src="/assets/backstage.png"
               alt="Icono Backstage"
               width={150}
               height={30}
               isActive={isCounterZero}
+              onOpenModal={onOpenBackstage || (() => {})}
             />
 
             <div className="relative">

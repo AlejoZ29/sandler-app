@@ -1,27 +1,28 @@
-import Link from 'next/link';
+'use client';
+import React from 'react';
 import Image from 'next/image';
 
 interface BackstageProps {
-  href: string;
   src: string;
   alt: string;
   width: number;
   height: number;
   isActive?: boolean;
+  onOpenModal: () => void;
 }
 
 export const Backstage: React.FC<BackstageProps> = ({
-  href,
   src,
   alt,
   width,
   height,
-  isActive = false
+  isActive = false,
+  onOpenModal
 }) => {
   return (
-    <Link 
-      href={href} 
-      className={`transition-opacity duration-300 ${isActive ? 'opacity-50' : 'opacity-100'}`}
+    <button
+      onClick={onOpenModal}
+      className={`transition-opacity duration-300 ${isActive ? 'opacity-50' : 'opacity-100'} cursor-pointer`}
     >
       <Image
         src={src}
@@ -30,6 +31,6 @@ export const Backstage: React.FC<BackstageProps> = ({
         alt={alt}
         className="mx-auto"
       />
-    </Link>
+    </button>
   );
 };
