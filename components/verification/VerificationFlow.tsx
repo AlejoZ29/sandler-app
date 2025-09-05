@@ -43,16 +43,15 @@ export const VerificationFlow = () => {
       <div className="spotlight-right"></div>
       <div className={`transition-all duration-500 ease-in-out w-80 lg:w-xl ${isVerifying ? 'transform -translate-y-8 scale-75' : ''}`}>
         <Image
-          src="/assets/logo.png"
+          src="/assets/thesandlerstyle.svg"
           width={450}
           height={450}
           alt="Logo Sandlers Show"
-          className="transition-all duration-500 ease-in-out mx-auto w-500 lg:w-[600px]"
+          className="transition-all duration-500 ease-in-out mx-auto w-500 lg:w-[600px] mb-12"
         />
-        <p className={`${isVerifying ? '-mt-2 lg:mt-0 -mb-10' : '-mt-2 lg:mt-0'} text-center mx-auto shadow-amber-300 text-sm md:text-xl lg:text-2xl text-white font-medium transition-all duration-500 mt-2 md:w-[500px]`}>
+        <p className={`${isVerifying ? '-mt- lg:mt-0 -mb-10' : '-mt-2 lg:mt-0'} mt-5 text-center mx-auto shadow-amber-300 text-sm md:text-xl lg:text-2xl text-white font-medium transition-all duration-500 mt-2 md:w-[500px]`}>
           {isVerifying 
-            ? (error || "Ingresa el código para continuar")
-            : "Estar a la moda, es tenerlo en tu pantalla"
+            && (error || "Ingresa el código para continuar")
           }
         </p>
       </div>

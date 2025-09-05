@@ -79,7 +79,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
       'punchdrunkloveme': 'Punch-Drunk Love',
       '50firstdates': '50 First Dates',
       'pixels': 'Pixels',
-      'eightcrazynights': "Adam Sandler's Eight Crazy Nights",
+      'eightcrazynights': "Eight Crazy Nights",
       'angrymanager': 'Anger Management',
       'justgowithit': 'Just Go With It',
       'thelongestyard': 'The Longest Yard',
@@ -163,9 +163,9 @@ export const MovieModal: React.FC<MovieModalProps> = ({
           </svg>
         </button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-full p-8 lg:p-32 opacity-100">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 h-full p-8 lg:p-32 opacity-100">
           {/* Columna izquierda: Solo Look y Trailer */}
-          <div className="flex flex-col justify-center space-y-8">
+          <div className="flex flex-row-reverse justify-center space-y-8 col-start-1 col-end-3">
             {/* Look image */}
             <div className="flex items-center justify-center">
               <div className="relative">
@@ -189,7 +189,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
 
             {/* Trailer de YouTube */}
             {movieData && movieData.trailer && (
-              <div className="flex items-center justify-center">
+              <div className="flex flex-1 items-center justify-center">
                 <div className="w-[90%] h-[500px]">
                   {getYouTubeEmbedUrl(movieData.trailer) && getYouTubeEmbedUrl(movieData.trailer).trim() !== '' ? (
                     <iframe
@@ -213,7 +213,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
           </div>
 
           {/* Columna derecha: Todo lo demás */}
-          <div className="flex flex-col justify-center space-y-6">
+          <div className="flex flex-col justify-center space-y-6 cols-span-4 col-start-3 col-end-5">
             {/* Contador */}
             <div className="flex items-center justify-center">
               <Counter clickedImages={clickedImages} totalImages={totalImages} />
@@ -232,7 +232,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
             {movieData && (
               <>
                 {/* Poster */}
-                <div className="flex row-reverse justify-center">
+                <div className="flex flex-col row-reverse justify-center items-center">
                   <div className="flex justify-center">
                     {finalMovieImage && finalMovieImage.trim() !== '' ? (
                       <Image
@@ -279,14 +279,14 @@ export const MovieModal: React.FC<MovieModalProps> = ({
                 <div className="h-px bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-200"></div>
 
                 {/* Descripción */}
-                <div className="text-left">
+                <div className="text-left mb-12">
                   <p className="text-white text-sm lg:text-base leading-relaxed">
                     {movieData.synopsis}
                   </p>
                 </div>
 
                 {/* Botón Continuar */}
-                <div className="flex justify-center md:justify-start mt-6 my-6 md:my-0">
+                <div className="flex justify-center md:justify-start mt-12 my-6 md:my-0">
                   <Button
                     callToAction={handleContinueClick}
                     classes="px-8 py-3 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-black hover:from-yellow-300 hover:to-yellow-400 transition-all duration-300 font-medium shadow-lg"
