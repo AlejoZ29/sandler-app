@@ -20,10 +20,6 @@ export async function POST(request: NextRequest) {
 
     const { name, lastName, compain, role, email, birthday, policy } = validatedData;
     
-    // Convertir birthday string a Date object
-    const [day, month] = birthday.split('/').map((num: string) => parseInt(num, 10));
-    const currentYear = new Date().getFullYear();
-    const birthdayDate = new Date(currentYear, month - 1, day);
     
     // Verificar si el email ya existe
     const existingUser = await prisma.user.findUnique({
@@ -45,7 +41,7 @@ export async function POST(request: NextRequest) {
         compain: compain.trim(),
         role: role.trim(),
         email: email.toLowerCase().trim(),
-        birthday: birthdayDate,
+        birthday: birthday.trim(),
         policy: policy
       }
     });

@@ -19,7 +19,7 @@ model User {
   lastName  String
   compain   String
   role      String
-  birthday  DateTime
+  birthday  String
   policy    Boolean
   email     String   @unique
   createdAt DateTime @default(now())
