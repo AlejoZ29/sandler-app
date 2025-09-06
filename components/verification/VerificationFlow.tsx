@@ -26,21 +26,22 @@ export const VerificationFlow = () => {
       setIsCheckingRegistration(false);
     };
 
-    // Pequeño delay para asegurar que el contexto esté completamente cargado
-    const timer = setTimeout(checkRegistration, 100);
+    // Delay para mostrar el loader y asegurar que el contexto esté completamente cargado
+    const timer = setTimeout(checkRegistration, 800);
     return () => clearTimeout(timer);
   }, [isFormCompleted, userRegistrationId, router]);
 
   // Mostrar loading mientras se verifica el estado de registro
   if (isCheckingRegistration) {
+    console.log('Mostrando loader - isCheckingRegistration:', isCheckingRegistration);
     return (
       <div className="font-sans flex flex-col items-center justify-center h-screen p-8 sm:p-20 page-start">
         <div className="spotlight-center"></div>
         <div className="spotlight-left"></div>
         <div className="spotlight-right"></div>
-        <div className="flex flex-col items-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400 mb-4"></div>
-          <p className="text-white text-lg">Cargando...</p>
+        <div className="flex flex-col items-center z-10">
+          <div className="animate-spin rounded-full h-16 w-16 border-4 border-gray-600 border-t-yellow-400 mb-6"></div>
+          <p className="text-white text-xl font-medium">Cargando...</p>
         </div>
       </div>
     );

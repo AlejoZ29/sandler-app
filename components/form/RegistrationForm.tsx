@@ -43,8 +43,8 @@ export const RegistrationForm = () => {
       setIsCheckingRegistration(false);
     };
 
-    // Pequeño delay para asegurar que el contexto esté completamente cargado
-    const timer = setTimeout(checkRegistration, 100);
+    // Delay para mostrar el loader y asegurar que el contexto esté completamente cargado
+    const timer = setTimeout(checkRegistration, 800);
     return () => clearTimeout(timer);
   }, [isFormCompleted, userRegistrationId, router]);
 
@@ -53,8 +53,8 @@ export const RegistrationForm = () => {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center py-8 px-4 sm:px-12">
         <div className="flex flex-col items-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400 mb-4"></div>
-          <p className="text-white text-lg">Cargando...</p>
+          <div className="animate-spin rounded-full h-16 w-16 border-4 border-gray-600 border-t-yellow-400 mb-6"></div>
+          <p className="text-white text-xl font-medium">Cargando...</p>
         </div>
       </div>
     );
