@@ -1,5 +1,5 @@
 'use client';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button, CodeInput } from "@/components";
@@ -12,7 +12,14 @@ export const VerificationFlow = () => {
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
-  const { setVerified } = useAuth();
+  const { setVerified, isFormCompleted, userRegistrationId } = useAuth();
+
+  // Verificar si el usuario ya está registrado y redirigir automáticamente
+  useEffect(() => {
+    if (isFormCompleted && userRegistrationId) {
+      router.replace('/home');
+    }
+  }, [isFormCompleted, userRegistrationId, router]);
 
   const handleEnterClick = () => {
     setIsVerifying(true);

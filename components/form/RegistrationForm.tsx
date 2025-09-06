@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Logo } from '@/components';
 import { useAuth } from '@/app/context/AuthContext';
@@ -16,7 +16,7 @@ interface FormErrors {
 
 export const RegistrationForm = () => {
   const router = useRouter();
-  const { setFormCompleted } = useAuth();
+  const { setFormCompleted, isFormCompleted, userRegistrationId } = useAuth();
   const [formData, setFormData] = useState<RegistrationFormData>({
     name: '',
     lastName: '',
@@ -30,6 +30,13 @@ export const RegistrationForm = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+
+  // Verificar si el usuario ya está registrado y redirigir automáticamente
+  useEffect(() => {
+    if (isFormCompleted && userRegistrationId) {
+      router.replace('/home');
+    }
+  }, [isFormCompleted, userRegistrationId, router]);
 
   // const validateField = (name: string, value: string | boolean) => {
   //   switch (name) {
