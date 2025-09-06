@@ -227,8 +227,8 @@ export const RegistrationForm = () => {
   };
 
   return (
-    <div className="min-h-screen max-h-screen overflow-hidden flex flex-col items-center justify-center mx-12 lg:mx-auto lg:grid lg:grid-cols-12">
-      <div className="col-start-8 col-end-12 w-full mx-12 lg:mx-auto max-w-[600px] h-full max-h-screen overflow-y-auto overflow-x-hidden py-4 flex flex-col justify-center scrollbar-hide">
+    <div className="min-h-screen flex flex-col items-center justify-start py-8 px-4 sm:px-12 lg:justify-center lg:grid lg:grid-cols-12 lg:mx-auto">
+      <div className="w-full max-w-[600px] lg:col-start-8 lg:col-end-12 lg:mx-auto">
         <div className="mb-8 w-52 mx-auto lg:w-full">
           <Logo />
         </div>
@@ -339,7 +339,7 @@ export const RegistrationForm = () => {
             <div className="w-full">
               {errors.birthday && touched.birthday && <span className="text-red-500 text-sm block mb-1">{errors.birthday}</span>}
               <input
-                type="number"
+                type="text"
                 placeholder="dd/mm"
                 value={formData.birthday}
                 onChange={(e) => handleInputChange('birthday', e.target.value)}
