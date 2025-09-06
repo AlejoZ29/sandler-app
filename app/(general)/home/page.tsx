@@ -19,6 +19,7 @@ export default function HomePage() {
   // Modal state
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState<string | null>(null);
+  const [pendingCongrats, setPendingCongrats] = useState(false);
   const totalImages = 19; // Número total de películas ocultas
 
   useEffect(() => {
@@ -72,13 +73,13 @@ export default function HomePage() {
       handleImageClick(polylineName);
       playSound();
       
-      // Si después de agregar esta imagen tenemos exactamente 10, mostrar CongratsModal
-      if (clickedImages.size + 1 === 10) {
-        openCongratsModal();
-      } else {
-        setSelectedMovie(polylineName);
-        setModalOpen(true);
+      // Abrir primero el MovieModal; si con este clic se llega a 10, marcar para abrir Congrats al cerrar
+      const newSize = clickedImages.size + 1;
+      if (newSize === 10) {
+        setPendingCongrats(true);
       }
+      setSelectedMovie(polylineName);
+      setModalOpen(true);
     }
   };
 
@@ -86,6 +87,10 @@ export default function HomePage() {
     setModalOpen(false);
     if (resetMovie) {
       setSelectedMovie(null);
+    }
+    if (pendingCongrats) {
+      setPendingCongrats(false);
+      openCongratsModal();
     }
   };
 

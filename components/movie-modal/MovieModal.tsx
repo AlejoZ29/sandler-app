@@ -163,9 +163,9 @@ export const MovieModal: React.FC<MovieModalProps> = ({
           </svg>
         </button>
 
-        <div className="flex flex-col lg:grid lg:grid-cols-4 gap-8 h-full p-8 lg:p-32 opacity-100 overflow-auto">
+        <div className="flex flex-col-reverse 2xl:grid 2xl:grid-cols-4 gap-8 h-full p-8 lg:p-32 opacity-100 overflow-auto">
           {/* Columna izquierda: Solo Look y Trailer */}
-          <div className="flex flex-col lg:flex-col xl:flex-row-reverse justify-center space-y-8 col-start-1 col-end-3">
+          <div className="flex flex-col justify-center space-y-8 col-start-1 col-end-3">
             {/* Look image */}
             <div className="flex items-center justify-center">
               <div className="relative">
@@ -189,7 +189,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
 
             {/* Trailer de YouTube */}
             {movieData && movieData.trailer && (
-              <div className="flex flex-1 items-center justify-center">
+              <div className="flex flex-col items-center justify-center">
                 <div className="w-[90%] h-[500px]">
                   {getYouTubeEmbedUrl(movieData.trailer) && getYouTubeEmbedUrl(movieData.trailer).trim() !== '' ? (
                     <iframe
@@ -200,7 +200,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
-                      className="rounded-lg"
+                      className="rounded-lg mr-25"
                     />
                   ) : (
                     <div className="w-full h-64 bg-gray-800 rounded-lg flex items-center justify-center">

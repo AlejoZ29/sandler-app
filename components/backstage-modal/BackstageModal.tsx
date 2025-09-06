@@ -146,7 +146,7 @@ export const BackstageModal: React.FC<BackstageModalProps> = ({
           </svg>
         </button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-1 gap-8 h-full p-8 lg:p-32 opacity-100">
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-8 h-full p-8 lg:p-32 opacity-100 scale-75 -mt-25 2xl:scale-100 2xlmt-0">
           {/* Contenido centrado como en el MovieModal */}
           <div className="flex flex-col justify-center space-y-6">
             
