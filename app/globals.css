@@ -113,7 +113,7 @@ html, body {
   top: 0;
   left: 0;
   right: 0;
-  height: 80px;
+  height: 120px;
   background: 
     radial-gradient(circle at 10% 50%, rgba(255, 215, 0, 0.7) 6px, transparent 6px),
     radial-gradient(circle at 20% 50%, rgba(255, 223, 0, 0.5) 6px, transparent 6px),
@@ -122,7 +122,6 @@ html, body {
     radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.6) 6px, transparent 6px),
     radial-gradient(circle at 60% 50%, rgba(255, 223, 0, 0.7) 6px, transparent 6px),
     radial-gradient(circle at 70% 50%, rgba(255, 215, 0, 0.5) 6px, transparent 6px),
-    radial-gradient(circle at 80% 50%, rgba(255, 223, 0, 0.8) 6px, transparent 6px),
     radial-gradient(circle at 90% 50%, rgba(255, 215, 0, 0.6) 6px, transparent 6px);
   background-size: 10% 100%;
   animation: lightFlicker 3s ease-in-out infinite;
@@ -134,7 +133,7 @@ html, body {
 .page-start::before {
   content: '';
   position: absolute;
-  bottom: 10px;
+  bottom: 40px;
   left: 0;
   right: 0;
   height: 80px;
@@ -146,8 +145,7 @@ html, body {
     radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.5) 6px, transparent 6px),
     radial-gradient(circle at 60% 50%, rgba(255, 223, 0, 0.6) 6px, transparent 6px),
     radial-gradient(circle at 70% 50%, rgba(255, 215, 0, 0.8) 6px, transparent 6px),
-    radial-gradient(circle at 80% 50%, rgba(255, 223, 0, 0.4) 6px, transparent 6px),
-    radial-gradient(circle at 90% 50%, rgba(255, 215, 0, 0.7) 6px, transparent 6px);
+    radial-gradient(circle at 80% 50%, rgba(255, 223, 0, 0.4) 6px, transparent 6px);
   background-size: 10% 100%;
   animation: lightFlickerSlow 3.5s ease-in-out infinite;
   pointer-events: none;

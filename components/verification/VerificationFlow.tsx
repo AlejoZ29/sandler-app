@@ -41,16 +41,17 @@ export const VerificationFlow = () => {
       <div className="spotlight-center"></div>
       <div className="spotlight-left"></div>
       <div className="spotlight-right"></div>
-      <div className={`transition-all duration-500 ease-in-out w-80 lg:w-xl ${isVerifying ? 'transform -translate-y-8 scale-75' : ''}`}>
-        <Image
-          src="/assets/thesandlerstyle.svg"
-          width={450}
-          height={450}
-          alt="Logo Sandlers Show"
-          className="transition-all duration-500 ease-in-out mx-auto w-500 lg:w-[600px] mb-12"
-        />
-        <p className={`${isVerifying ? '-mt- lg:mt-0 -mb-10' : '-mt-2 lg:mt-0'} mt-5 text-center mx-auto shadow-amber-300 text-sm md:text-xl lg:text-2xl text-white font-medium transition-all duration-500 mt-2 md:w-[500px]`}>
-          {isVerifying 
+      <div className={`transition-all duration-500 ease-in-out w-full mb-10  ${isVerifying ? 'transform -translate-y-8 scale-75' : ''}`}>
+        {!isVerifying && (
+          <Image
+            src="/assets/thesandlerstyle.svg"
+            width={450}
+            height={450}
+            alt="Logo Sandlers Show"
+            className="transition-all duration-500 ease-in-out mx-auto w-500 lg:w-[300px] 2xl:w-[500px] 2xl:mb-12"
+          />)}
+        <p className={`${isVerifying ? '-mt- lg:mt-0 -mb-10' : '-mt-2 lg:mt-0'} mt-5 text-center mx-auto shadow-amber-300 text-xl  lg:text-2xl text-white font-medium transition-all duration-500 md:w-[500px]`}>
+          {isVerifying
             && (error || "Ingresa el código para continuar")
           }
         </p>
@@ -59,11 +60,11 @@ export const VerificationFlow = () => {
       {isVerifying && (
         <div className="flex flex-col items-center transition-all duration-500 ease-in-out">
           <CodeInput code={code} onChange={handleCodeChange} />
-          <Button 
-            classes="mt-10" 
-            textButton="Verificar" 
+          <Button
+            classes="mt-10"
+            textButton="Verificar"
             disabled={code.length !== 6}
-            callToAction={handleVerify} 
+            callToAction={handleVerify}
           />
         </div>
       )}

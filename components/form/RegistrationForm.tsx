@@ -229,11 +229,11 @@ export const RegistrationForm = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-start py-8 px-4 sm:px-12 lg:justify-center lg:grid lg:grid-cols-12 lg:mx-auto">
       <div className="w-full max-w-[600px] lg:col-start-8 lg:col-end-12 lg:mx-auto">
-        <div className="mb-8 w-52 mx-auto lg:w-full">
+        <div className="mb-8 w-56 mx-auto lg:w-full">
           <Logo />
         </div>
 
-        <form className="w-full max-w space-y-4" onSubmit={handleSubmit} onClick={handleTooltipClose}>
+        <form className="w-full px-12 lg:px-0 max-w space-y-4" onSubmit={handleSubmit} onClick={handleTooltipClose}>
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
               Nombre:{showRequiredAsterisk('name') && <span className="text-red-500 ml-1">*</span>}
@@ -325,10 +325,9 @@ export const RegistrationForm = () => {
                 >
                   ?
                 </span>
-                <div 
-                  className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-800 text-white text-xs rounded shadow-lg transition-opacity duration-200 whitespace-nowrap z-10 ${
-                    isTooltipVisible ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                  } ${isTooltipVisible ? 'pointer-events-auto' : 'pointer-events-none'}`}
+                <div
+                  className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-800 text-white text-xs rounded shadow-lg transition-opacity duration-200 whitespace-nowrap z-10 ${isTooltipVisible ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                    } ${isTooltipVisible ? 'pointer-events-auto' : 'pointer-events-none'}`}
                   onClick={(e) => e.stopPropagation()}
                 >
                   Fecha de cumpleaños
@@ -349,41 +348,41 @@ export const RegistrationForm = () => {
             </div>
           </div>
 
-      <div className="flex items-start space-x-2">
-        <input
-          type="checkbox"
-          checked={formData.policy}
-          onChange={(e) => handleInputChange('policy', e.target.checked)}
-          className="mt-1"
-        />
-        <label className="text-white text-sm">
-          Al continuar, aceptas nuestra política de tratamiento de datos.{showRequiredAsterisk('policy') && <span className="text-red-500 ml-1">*</span>}{' '}
-          <a
-            href="https://intl.sonypictures.com/es/privacy-policy"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-yellow-400 underline hover:text-yellow-300"
-          >
-            Ver política completa aquí
-          </a>
-        </label>
-        {errors.policy && touched.policy && <span className="text-red-500 text-sm mb-2 block">{errors.policy}</span>}
-      </div>
-      {/* Error de envío */}
-      {submitError && (
-        <div className="text-red-500 text-sm text-center bg-red-100 p-3 rounded-lg border">
-          {submitError}
-        </div>
-      )}
+          <div className="flex items-start space-x-2">
+            <input
+              type="checkbox"
+              checked={formData.policy}
+              onChange={(e) => handleInputChange('policy', e.target.checked)}
+              className="mt-1"
+            />
+            <label className="text-white text-sm">
+              Al continuar, aceptas nuestra política de tratamiento de datos.{showRequiredAsterisk('policy') && <span className="text-red-500 ml-1">*</span>}{' '}
+              <a
+                href="https://intl.sonypictures.com/es/privacy-policy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-yellow-400 underline hover:text-yellow-300"
+              >
+                Ver política completa aquí
+              </a>
+            </label>
+            {errors.policy && touched.policy && <span className="text-red-500 text-sm mb-2 block">{errors.policy}</span>}
+          </div>
+          {/* Error de envío */}
+          {submitError && (
+            <div className="text-red-500 text-sm text-center bg-red-100 p-3 rounded-lg border">
+              {submitError}
+            </div>
+          )}
 
-      <div className="pt-4 flex flex-col items-center mt-10">
-        <Button
-          textButton={isSubmitting ? "Enviando..." : "Enviar"}
-          disabled={isSubmitting}
-          callToAction={() => { }}
-        />
-      </div>
-    </form>
+          <div className="pt-4 flex flex-col items-center mt-10 xl:mt-5 pb-10">
+            <Button
+              textButton={isSubmitting ? "Enviando..." : "Enviar"}
+              disabled={isSubmitting}
+              callToAction={() => { }}
+            />
+          </div>
+        </form>
       </div>
     </div>
   );
