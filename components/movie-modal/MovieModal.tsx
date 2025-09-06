@@ -164,6 +164,14 @@ export const MovieModal: React.FC<MovieModalProps> = ({
         </button>
 
         <div className="flex flex-col-reverse 2xl:grid 2xl:grid-cols-4 gap-8 h-full p-8 lg:p-32 opacity-100 overflow-auto">
+
+        <div className="flex 2xl:hidden  justify-center 2xl:justify-start mt-12 my-6 md:my-0">
+            <Button
+              callToAction={handleContinueClick}
+              classes="px-8 py-3 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-black hover:from-yellow-300 hover:to-yellow-400 transition-all duration-300 font-medium shadow-lg"
+              textButton="Continuar"
+            />
+          </div>
           {/* Columna izquierda: Solo Look y Trailer */}
           <div className="flex flex-col justify-center space-y-8 col-start-1 col-end-3">
             {/* Look image */}
@@ -286,7 +294,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
                 </div>
 
                 {/* Botón Continuar */}
-                <div className="flex justify-center 2xl:justify-start mt-12 my-6 md:my-0">
+                <div className="hidden 2xl:flex justify-center 2xl:justify-start mt-12 my-6 md:my-0">
                   <Button
                     callToAction={handleContinueClick}
                     classes="px-8 py-3 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-black hover:from-yellow-300 hover:to-yellow-400 transition-all duration-300 font-medium shadow-lg"
