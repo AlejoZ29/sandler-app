@@ -146,7 +146,7 @@ export const BackstageModal: React.FC<BackstageModalProps> = ({
           </svg>
         </button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-1 gap-8 h-full p-8 lg:p-32 opacity-100 scale-75 -mt-25 2xl:scale-100 2xlmt-0">
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-8 h-full p-8 lg:p-32 opacity-100 scale-100 md:scale-50 -mt-35 2xl:scale-100">
           {/* Contenido centrado como en el MovieModal */}
           <div className="flex flex-col justify-center space-y-6">
             
@@ -176,7 +176,7 @@ export const BackstageModal: React.FC<BackstageModalProps> = ({
               {/* Flecha izquierda */}
               <button
                 onClick={handlePrevious}
-                className="text-yellow-400 hover:text-white transition-colors duration-300 p-2 z-10"
+                className="text-yellow-400 hover:text-white transition-colors duration-300 p-2 z-10 scale-150"
               >
                 <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
@@ -226,12 +226,7 @@ export const BackstageModal: React.FC<BackstageModalProps> = ({
                   </div>
                 )}
                 
-                {/* Indicador de posición */}
-                <div className="absolute -bottom-15 left-1/2 transform -translate-x-1/2 text-3xl ">
-                  <p className="text-yellow-400 font-medium">
-                    {currentIndex + 1} / {allMovies.length}
-                  </p>
-                </div>
+    
               </div>
 
               {/* Imagen siguiente (pequeña y opaca) */}
@@ -259,7 +254,7 @@ export const BackstageModal: React.FC<BackstageModalProps> = ({
               {/* Flecha derecha */}
               <button
                 onClick={handleNext}
-                className="text-yellow-400 hover:text-white transition-colors duration-300 p-2 z-10"
+                className="text-yellow-400 hover:text-white transition-colors duration-300 p-2 z-10 scale-150"
               >
                 <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
