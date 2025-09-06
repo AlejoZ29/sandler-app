@@ -160,7 +160,6 @@
     },
     {
         "name": "Zookeeper",
-        "looks": "/assets/looks/zookeeper.png",
         "trailer": "https://www.youtube.com/watch?v=pNJxxRi7AeE",
         "synopsis": "Un grupo de animales de un zoológico deciden romper su código de silencio para lograr que su querido cuidador encuentre el amor de su vida sin tener que abandonar su trabajo.",
         "poster": "/assets/posters/zookeeper.png",
