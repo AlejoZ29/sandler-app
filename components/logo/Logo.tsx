@@ -1,11 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-interface LogoProps {
-  textClasses?: string
-}
-
-export const Logo = ({textClasses}: LogoProps) => {
+export const Logo = () => {
   return (
     <>
       <Image
