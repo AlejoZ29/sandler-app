@@ -30,13 +30,35 @@ export const RegistrationForm = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+  const [isCheckingRegistration, setIsCheckingRegistration] = useState(true);
 
   // Verificar si el usuario ya está registrado y redirigir automáticamente
   useEffect(() => {
-    if (isFormCompleted && userRegistrationId) {
-      router.replace('/home');
-    }
+    const checkRegistration = () => {
+      if (isFormCompleted && userRegistrationId) {
+        router.replace('/home');
+        return;
+      }
+      // Si no está registrado, mostrar el formulario normal
+      setIsCheckingRegistration(false);
+    };
+
+    // Pequeño delay para asegurar que el contexto esté completamente cargado
+    const timer = setTimeout(checkRegistration, 100);
+    return () => clearTimeout(timer);
   }, [isFormCompleted, userRegistrationId, router]);
+
+  // Mostrar loading mientras se verifica el estado de registro
+  if (isCheckingRegistration) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center py-8 px-4 sm:px-12">
+        <div className="flex flex-col items-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400 mb-4"></div>
+          <p className="text-white text-lg">Cargando...</p>
+        </div>
+      </div>
+    );
+  }
 
   // const validateField = (name: string, value: string | boolean) => {
   //   switch (name) {

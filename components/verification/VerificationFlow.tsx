@@ -11,15 +11,40 @@ export const VerificationFlow = () => {
   const [isVerifying, setIsVerifying] = useState(false);
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
+  const [isCheckingRegistration, setIsCheckingRegistration] = useState(true);
   const router = useRouter();
   const { setVerified, isFormCompleted, userRegistrationId } = useAuth();
 
   // Verificar si el usuario ya está registrado y redirigir automáticamente
   useEffect(() => {
-    if (isFormCompleted && userRegistrationId) {
-      router.replace('/home');
-    }
+    const checkRegistration = () => {
+      if (isFormCompleted && userRegistrationId) {
+        router.replace('/home');
+        return;
+      }
+      // Si no está registrado, mostrar la página normal
+      setIsCheckingRegistration(false);
+    };
+
+    // Pequeño delay para asegurar que el contexto esté completamente cargado
+    const timer = setTimeout(checkRegistration, 100);
+    return () => clearTimeout(timer);
   }, [isFormCompleted, userRegistrationId, router]);
+
+  // Mostrar loading mientras se verifica el estado de registro
+  if (isCheckingRegistration) {
+    return (
+      <div className="font-sans flex flex-col items-center justify-center h-screen p-8 sm:p-20 page-start">
+        <div className="spotlight-center"></div>
+        <div className="spotlight-left"></div>
+        <div className="spotlight-right"></div>
+        <div className="flex flex-col items-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400 mb-4"></div>
+          <p className="text-white text-lg">Cargando...</p>
+        </div>
+      </div>
+    );
+  }
 
   const handleEnterClick = () => {
     setIsVerifying(true);
