@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
+// import Image from 'next/image'; // Cambiar a img HTML
 import { Button } from '@/components';
 import { Counter } from '@/components/counter/Counter';
 import moviesData from '@/app/data.json';
@@ -170,13 +170,12 @@ export const MovieModal: React.FC<MovieModalProps> = ({
             <div className="flex items-center justify-center">
               <div className="relative">
                 {finalLookImage && finalLookImage.trim() !== '' ? (
-                  <Image
+                  <img
                     src={finalLookImage}
                     alt={`${displayName} Look`}
                     width={300}
                     height={500}
                     className="rounded-lg shadow-2xl"
-                    priority
                     onError={() => setLookImageError(true)}
                   />
                 ) : (
@@ -235,13 +234,12 @@ export const MovieModal: React.FC<MovieModalProps> = ({
                 <div className="flex flex-col row-reverse justify-center items-center">
                   <div className="flex justify-center">
                     {finalMovieImage && finalMovieImage.trim() !== '' ? (
-                      <Image
+                      <img
                         src={finalMovieImage}
                         alt={`${displayName} Title`}
                         width={400}
                         height={120}
                         className="rounded-lg"
-                        priority
                         onError={() => setMovieImageError(true)}
                       />
                     ) : (
@@ -252,12 +250,10 @@ export const MovieModal: React.FC<MovieModalProps> = ({
                   </div>
                   <div className="relative w-40 h-60 lg:w-48 lg:h-72">
                     {movieData.poster && movieData.poster.trim() !== '' ? (
-                      <Image
+                      <img
                         src={movieData.poster}
                         alt={`${movieData.name} Poster`}
-                        fill
-                        className="rounded-lg object-cover shadow-lg"
-                        priority
+                        className="w-full h-full object-cover rounded-lg shadow-lg"
                       />
                     ) : (
                       <div className="w-full h-full bg-gray-800 rounded-lg shadow-lg flex items-center justify-center">

@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
+// import Image from 'next/image'; // Cambiar a img HTML
 import { useGame } from '@/app/context/GameContext';
 import moviesData from '@/app/data.json';
 
@@ -153,13 +153,12 @@ export const BackstageModal: React.FC<BackstageModalProps> = ({
             {/* Logo de la película (arriba) */}
             <div className="flex justify-center">
               {movieLogo && !movieImageError ? (
-                <Image
+                <img
                   src={movieLogo}
                   alt={`${movieData?.name} Logo`}
                   width={500}
                   height={150}
                   className="rounded-lg"
-                  priority
                   onError={() => setMovieImageError(true)}
                 />
               ) : (
@@ -186,7 +185,7 @@ export const BackstageModal: React.FC<BackstageModalProps> = ({
               {/* Imagen anterior (pequeña y opaca) */}
               <div className="relative flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105" onClick={handlePrevious}>
                 {prevLookImage && !lookImageError ? (
-                  <Image
+                  <img
                     src={prevLookImage}
                     alt={isPrevDiscovered ? `Look anterior` : 'Look oculto'}
                     width={200}
@@ -208,7 +207,7 @@ export const BackstageModal: React.FC<BackstageModalProps> = ({
               {/* Imagen actual (grande y centrada) */}
               <div className="relative flex items-center justify-center">
                 {currentLookImage && !lookImageError ? (
-                  <Image
+                  <img
                     src={currentLookImage}
                     alt={isCurrentDiscovered ? `${movieData?.name} Look` : 'Look oculto'}
                     width={400}
@@ -217,7 +216,6 @@ export const BackstageModal: React.FC<BackstageModalProps> = ({
                     style={{ 
                       filter: isCurrentDiscovered ? 'brightness(1)' : 'brightness(0.3)' 
                     }}
-                    priority
                     onError={() => setLookImageError(true)}
                   />
                 ) : (
@@ -237,7 +235,7 @@ export const BackstageModal: React.FC<BackstageModalProps> = ({
               {/* Imagen siguiente (pequeña y opaca) */}
               <div className="relative flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105" onClick={handleNext}>
                 {nextLookImage && !lookImageError ? (
-                  <Image
+                  <img
                     src={nextLookImage}
                     alt={isNextDiscovered ? `Look siguiente` : 'Look oculto'}
                     width={200}
