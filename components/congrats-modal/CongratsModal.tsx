@@ -76,7 +76,7 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
               Has completado con éxito el reto de encontrar los <span className="text-yellow-300 font-bold">10 elementos de película</span>.
             </p>
             <p className="text-lg lg:text-xl text-white mb-6">
-              Ahora puedes ver el <span className="text-yellow-300 font-bold">catálogo completo de películas</span> de que tenemos para complementar tu oferta.
+              Ahora puedes ver el <span className="text-yellow-300 font-bold">inventario completo de películas</span> de que tenemos para complementar tu oferta.
             </p>
             <div className="flex items-center justify-center space-x-4 mb-8">
               <div className="flex-1 h-px bg-gradient-to-r from-transparent to-yellow-400"></div>
