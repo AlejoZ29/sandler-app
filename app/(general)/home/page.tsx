@@ -94,15 +94,6 @@ export default function HomePage() {
     setCongratModalOpen(false);
   };
 
-  const handleMovieSelectFromCongrats = (movieName: string) => {
-    // Cerrar el CongratsModal
-    setCongratModalOpen(false);
-    // Seleccionar la película
-    setSelectedMovie(movieName);
-    // Abrir el MovieModal
-    setModalOpen(true);
-  };
-
   return (
     <RouteProtection requireFormCompletion={true}>
       <div className="relative w-full h-screen overflow-hidden page-home">
@@ -599,7 +590,6 @@ export default function HomePage() {
         clickedImages={clickedImages}
         totalImages={totalImages}
         onClose={closeCongratModal}
-        onMovieSelect={handleMovieSelectFromCongrats}
       />
       </div>
     </RouteProtection>

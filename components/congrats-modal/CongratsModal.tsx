@@ -10,7 +10,6 @@ interface CongratsModalProps {
   clickedImages: Set<string>;
   totalImages: number;
   onClose: () => void;
-  onMovieSelect: (movieName: string) => void;
 }
 
 export const CongratsModal: React.FC<CongratsModalProps> = ({
@@ -18,7 +17,6 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
   clickedImages,
   totalImages,
   onClose,
-  onMovieSelect,
 }) => {
   const [hoveredMovie, setHoveredMovie] = useState<string | null>(null);
   const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
@@ -96,7 +94,6 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
                 className="relative group cursor-pointer"
                 onMouseEnter={() => setHoveredMovie(movie.name)}
                 onMouseLeave={() => setHoveredMovie(null)}
-                onClick={() => onMovieSelect(movie.name)}
               >
                 <div className="relative w-full aspect-[2/3] rounded-lg overflow-hidden border-2 border-transparent bg-gradient-to-r from-yellow-200 via-yellow-600 to-yellow-200 p-[2px] transition-all duration-300 hover:scale-105 hover:shadow-lg opacity-100">
                   <div className="relative w-full h-full rounded-lg overflow-hidden bg-gray-800">
