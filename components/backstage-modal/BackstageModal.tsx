@@ -58,10 +58,10 @@ export const BackstageModal: React.FC<BackstageModalProps> = ({
   const getLookImagePath = (movieName: string) => {
     const lookFileMap: { [key: string]: string } = {
       'bigdaddy': '/assets/looks/biddaddy.png',
-      'spanglish': '/assets/looks/spanglish.png',
+      'spanglish': '/assets/looks/Spanglish.png',
       'mrdeeds': '/assets/looks/mrdeeds.png',
       'clic': '/assets/looks/clic.png',
-      'zookeeper': '/assets/looks/zookeeper.png',
+      'zookeeper': '/assets/looks/Zookeeper.png',
       'shakestheclown': '/assets/looks/shakestheclown.png',
       'hoteltransylvania': '/assets/looks/hoteltransilvania.png',
       'grownups': '/assets/looks/grownups.png',
@@ -71,7 +71,7 @@ export const BackstageModal: React.FC<BackstageModalProps> = ({
       'youdontmesswiththezohan': '/assets/looks/youdontmesswiththezohan.png',
       'punchdrunkloveme': '/assets/looks/punchdrunklove.png',
       '50firstdates': '/assets/looks/50firstdates.png',
-      'pixels': '/assets/looks/pixels.png',
+      'pixels': '/assets/looks/Pixels.png',
       'eightcrazynights': '/assets/looks/eightcrazynights.png',
       'angrymanager': '/assets/looks/angrymanager.png',
       'justgowithit': '/assets/looks/justgowithit.png',
