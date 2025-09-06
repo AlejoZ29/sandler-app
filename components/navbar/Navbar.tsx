@@ -15,18 +15,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBackstage }) => {
   const pathname = usePathname();
   const isHome = pathname === '/home';
   const isCounterZero = clickedImages.size === 0;
-  const shouldCenterLogo = pathname === '/' || pathname === '/form';
+  const shouldCenterLogo = pathname === '/';
 
 
   return (
     <nav className={`absolute top-0 left-0 right-0 z-50 flex w-full -md:mt-32 mt-5 p-2 ${shouldCenterLogo ? 'justify-center' : 'justify-between'}`}>
       {shouldCenterLogo ? (
-        <div className="flex items-center scale-70 lg:scale-100">
+        <div className="flex items-center -mt-5 scale-70 lg:scale-100">
           <SonyLogo />
         </div>
       ) : (
         <>
-          <div className="flex items-center pl-32 scale-70 lg:scale-100">
+          <div className="hidden md:flex items-center pl-32 scale-70 lg:scale-100">
             <SonyLogo />
           </div>
 

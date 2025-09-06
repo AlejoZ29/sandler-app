@@ -28,7 +28,8 @@ export const RegistrationForm = () => {
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
-  const [touched, setTouched] = useState<{[key: string]: boolean}>({});
+  const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
+  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
 
   // const validateField = (name: string, value: string | boolean) => {
   //   switch (name) {
@@ -55,17 +56,17 @@ export const RegistrationForm = () => {
   const formatBirthday = (value: string) => {
     // Remove all non-digits
     const digits = value.replace(/\D/g, '');
-    
+
     // Limit to 4 digits
     const limitedDigits = digits.slice(0, 4);
-    
+
     if (limitedDigits.length === 0) return '';
-    
+
     if (limitedDigits.length === 1) {
       // Single digit - return as is
       return limitedDigits;
     }
-    
+
     if (limitedDigits.length === 2) {
       // Two digits - validate day (01-31)
       const day = parseInt(limitedDigits);
@@ -74,35 +75,35 @@ export const RegistrationForm = () => {
       }
       return limitedDigits;
     }
-    
+
     if (limitedDigits.length === 3) {
       // Day complete, starting month
       const day = parseInt(limitedDigits.slice(0, 2));
       // const monthDigit = parseInt(limitedDigits[2]); // Unused variable
-      
+
       if (day < 1 || day > 31) {
         return limitedDigits.slice(0, 2);
       }
-      
+
       return `${limitedDigits.slice(0, 2)}/${limitedDigits[2]}`;
     }
-    
+
     if (limitedDigits.length === 4) {
       // Complete format dd/mm
       const day = parseInt(limitedDigits.slice(0, 2));
       const month = parseInt(limitedDigits.slice(2, 4));
-      
+
       if (day < 1 || day > 31) {
         return limitedDigits.slice(0, 2);
       }
-      
+
       if (month < 1 || month > 12) {
         return `${limitedDigits.slice(0, 2)}/0${limitedDigits[2]}`;
       }
-      
+
       return `${limitedDigits.slice(0, 2)}/${limitedDigits.slice(2, 4)}`;
     }
-    
+
     return limitedDigits;
   };
 
@@ -124,17 +125,17 @@ export const RegistrationForm = () => {
 
   const handleInputChange = (name: keyof RegistrationFormData, value: string | boolean) => {
     let processedValue = value;
-    
+
     // Format birthday input automatically
     if (name === 'birthday' && typeof value === 'string') {
       processedValue = formatBirthday(value);
     }
-    
+
     setFormData(prev => ({ ...prev, [name]: processedValue } as RegistrationFormData));
-    
+
     // Mark field as touched
     setTouched(prev => ({ ...prev, [name]: true }));
-    
+
     // Clear error for this field when user types
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
@@ -148,8 +149,8 @@ export const RegistrationForm = () => {
       return true;
     } catch (error: unknown) {
       const validationErrors: FormErrors = {};
-      const touchedFields: {[key: string]: boolean} = {};
-      
+      const touchedFields: { [key: string]: boolean } = {};
+
       if (error instanceof ValidationError) {
         const yupError = error as YupError;
         if (yupError.inner) {
@@ -161,7 +162,7 @@ export const RegistrationForm = () => {
           });
         }
       }
-      
+
       setErrors(validationErrors);
       // Marcar todos los campos con errores como tocados
       setTouched(prevTouched => ({
@@ -180,9 +181,18 @@ export const RegistrationForm = () => {
     return !!(errors[fieldName] && touched[fieldName]);
   };
 
-  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
+  const handleTooltipToggle = (e: React.MouseEvent | React.TouchEvent) => {
+    e.stopPropagation();
+    setIsTooltipVisible(!isTooltipVisible);
+  };
+
+  const handleTooltipClose = () => {
+    setIsTooltipVisible(false);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     if (!(await validateForm())) {
       return;
     }
@@ -207,7 +217,7 @@ export const RegistrationForm = () => {
 
       setFormCompleted();
       router.push('/home');
-      
+
     } catch (error) {
       console.error('Error en el registro:', error);
       setSubmitError(error instanceof Error ? error.message : 'Error al enviar el formulario');
@@ -219,11 +229,11 @@ export const RegistrationForm = () => {
   return (
     <div className="min-h-screen max-h-screen overflow-hidden flex flex-col items-center justify-center mx-12 lg:mx-auto lg:grid lg:grid-cols-12">
       <div className="col-start-8 col-end-12 w-full mx-12 lg:mx-auto max-w-[600px] h-full max-h-screen overflow-y-auto overflow-x-hidden py-4 flex flex-col justify-center scrollbar-hide">
-        <div className="mb-8">
-          <Logo/>
+        <div className="mb-8 w-52 mx-auto lg:w-full">
+          <Logo />
         </div>
 
-        <form className="w-full max-w space-y-4" onSubmit={handleSubmit}>
+        <form className="w-full max-w space-y-4" onSubmit={handleSubmit} onClick={handleTooltipClose}>
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
               Nombre:{showRequiredAsterisk('name') && <span className="text-red-500 ml-1">*</span>}
@@ -242,7 +252,7 @@ export const RegistrationForm = () => {
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
-              Apellido:{showRequiredAsterisk('lastName') && <span className="text-red-500 ml-1">*</span>} 
+              Apellido:{showRequiredAsterisk('lastName') && <span className="text-red-500 ml-1">*</span>}
             </label>
             <div className="w-full">
               {errors.lastName && touched.lastName && <span className="text-red-500 text-sm block mb-1">{errors.lastName}</span>}
@@ -258,7 +268,7 @@ export const RegistrationForm = () => {
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
-              Compañia:{showRequiredAsterisk('compain') && <span className="text-red-500 ml-1">*</span>} 
+              Compañia:{showRequiredAsterisk('compain') && <span className="text-red-500 ml-1">*</span>}
             </label>
             <div className="w-full">
               {errors.compain && touched.compain && <span className="text-red-500 text-sm block mb-1">{errors.compain}</span>}
@@ -268,13 +278,13 @@ export const RegistrationForm = () => {
                 value={formData.compain}
                 onChange={(e) => handleInputChange('compain', e.target.value)}
                 className="w-full px-4 py-2 bg-white text-black rounded border-2 border-gray-300 focus:border-yellow-400 focus:outline-none placeholder-gray-600"
-              /> 
+              />
             </div>
           </div>
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
-              Cargo:{showRequiredAsterisk('role') && <span className="text-red-500 ml-1">*</span>} 
+              Cargo:{showRequiredAsterisk('role') && <span className="text-red-500 ml-1">*</span>}
             </label>
             <div className="w-full">
               {errors.role && touched.role && <span className="text-red-500 text-sm block mb-1">{errors.role}</span>}
@@ -290,7 +300,7 @@ export const RegistrationForm = () => {
 
           <div className="flex items-center justify-center gap-5">
             <label className="block text-white font-medium mb-2">
-              Email:{showRequiredAsterisk('email') && <span className="text-red-500 ml-1">*</span>} 
+              Email:{showRequiredAsterisk('email') && <span className="text-red-500 ml-1">*</span>}
             </label>
             <div className="w-full">
               {errors.email && touched.email && <span className="text-red-500 text-sm block mb-1">{errors.email}</span>}
@@ -305,14 +315,31 @@ export const RegistrationForm = () => {
           </div>
 
           <div className="flex items-center justify-center gap-5">
-            <label className="block text-white font-medium mb-2" title="Fecha de nacimiento">
+            <label className="flex items-center gap-2 text-white font-medium mb-2">
               ¿Cuándo celebramos contigo?{showRequiredAsterisk('birthday') && <span className="text-red-500 ml-1">*</span>}
-             <span className="block text-white text-sm">Fecha de cumpleaños</span>
+              <div className="group relative inline-flex items-center">
+                <span
+                  className="inline-flex items-center justify-center w-4 h-4 text-xs rounded-full bg-yellow-400 text-black cursor-help font-bold"
+                  onClick={handleTooltipToggle}
+                  onTouchStart={handleTooltipToggle}
+                >
+                  ?
+                </span>
+                <div 
+                  className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-800 text-white text-xs rounded shadow-lg transition-opacity duration-200 whitespace-nowrap z-10 ${
+                    isTooltipVisible ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                  } ${isTooltipVisible ? 'pointer-events-auto' : 'pointer-events-none'}`}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Fecha de cumpleaños
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
+                </div>
+              </div>
             </label>
             <div className="w-full">
               {errors.birthday && touched.birthday && <span className="text-red-500 text-sm block mb-1">{errors.birthday}</span>}
               <input
-                type="text"
+                type="number"
                 placeholder="dd/mm"
                 value={formData.birthday}
                 onChange={(e) => handleInputChange('birthday', e.target.value)}
@@ -322,41 +349,41 @@ export const RegistrationForm = () => {
             </div>
           </div>
 
-          <div className="flex items-start space-x-2">
-            <input
-              type="checkbox"
-              checked={formData.policy}
-              onChange={(e) => handleInputChange('policy', e.target.checked)}
-              className="mt-1"
-            />
-            <label className="text-white text-sm">
-              Al continuar, aceptas nuestra política de tratamiento de datos.{showRequiredAsterisk('policy') && <span className="text-red-500 ml-1">*</span>}{' '}
-              <a 
-                href="https://intl.sonypictures.com/es/privacy-policy" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-yellow-400 underline hover:text-yellow-300"
-              >
-                Ver política completa aquí
-              </a>
-            </label>
-            {errors.policy && touched.policy && <span className="text-red-500 text-sm mb-2 block">{errors.policy}</span>}
-          </div>
-          {/* Error de envío */}
-          {submitError && (
-            <div className="text-red-500 text-sm text-center bg-red-100 p-3 rounded-lg border">
-              {submitError}
-            </div>
-          )}
+      <div className="flex items-start space-x-2">
+        <input
+          type="checkbox"
+          checked={formData.policy}
+          onChange={(e) => handleInputChange('policy', e.target.checked)}
+          className="mt-1"
+        />
+        <label className="text-white text-sm">
+          Al continuar, aceptas nuestra política de tratamiento de datos.{showRequiredAsterisk('policy') && <span className="text-red-500 ml-1">*</span>}{' '}
+          <a
+            href="https://intl.sonypictures.com/es/privacy-policy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-yellow-400 underline hover:text-yellow-300"
+          >
+            Ver política completa aquí
+          </a>
+        </label>
+        {errors.policy && touched.policy && <span className="text-red-500 text-sm mb-2 block">{errors.policy}</span>}
+      </div>
+      {/* Error de envío */}
+      {submitError && (
+        <div className="text-red-500 text-sm text-center bg-red-100 p-3 rounded-lg border">
+          {submitError}
+        </div>
+      )}
 
-          <div className="pt-4 flex flex-col items-center mt-10">
-            <Button 
-              textButton={isSubmitting ? "Enviando..." : "Enviar"} 
-              disabled={isSubmitting}
-              callToAction={() => {}}
-            />
-          </div>
-        </form>
+      <div className="pt-4 flex flex-col items-center mt-10">
+        <Button
+          textButton={isSubmitting ? "Enviando..." : "Enviar"}
+          disabled={isSubmitting}
+          callToAction={() => { }}
+        />
+      </div>
+    </form>
       </div>
     </div>
   );
