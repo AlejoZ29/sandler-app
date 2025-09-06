@@ -31,6 +31,8 @@ export const RegistrationForm = () => {
   const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
   const [isCheckingRegistration, setIsCheckingRegistration] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   // Verificar si el usuario ya está registrado y redirigir automáticamente
   useEffect(() => {
@@ -201,9 +203,6 @@ export const RegistrationForm = () => {
       return false;
     }
   };
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState('');
 
   // Helper function to show asterisk for required fields with errors
   const showRequiredAsterisk = (fieldName: string): boolean => {

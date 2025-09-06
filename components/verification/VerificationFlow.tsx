@@ -33,7 +33,6 @@ export const VerificationFlow = () => {
 
   // Mostrar loading mientras se verifica el estado de registro
   if (isCheckingRegistration) {
-    console.log('Mostrando loader - isCheckingRegistration:', isCheckingRegistration);
     return (
       <div className="font-sans flex flex-col items-center justify-center h-screen p-8 sm:p-20 page-start">
         <div className="spotlight-center"></div>
