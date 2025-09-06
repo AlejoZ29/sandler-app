@@ -70,6 +70,7 @@
     },
     {
         "name": "Just Go With It",
+        "looks": "/assets/looks/justgowithit.png",
         "trailer": "https://www.youtube.com/watch?v=fpj7i2CPt8M",
         "synopsis": "El cirujano Danny decide contratar a su ayudante Katherine, una madre soltera con hijos, para que finjan ser su familia. Su intención es demostrarle a Palmer que su amor por ella es tan grande que está a punto de divorciarse de su mujer.",
         "poster": "/assets/posters/justgowithit.png",
@@ -78,6 +79,7 @@
     },
     {
         "name": "The Longest Yard",
+        "looks": "/assets/looks/thelongestyard.png",
         "trailer": "https://www.youtube.com/watch?v=l1BF53bXP8I",
         "synopsis": "Paul Crewe, un exjugador de la NFL, es detenido y enviado a prisión. Allí se verá obligado a convertir a un variado grupo de presos en un equipo que tendrá que jugar contra los guardias del centro.",
         "poster": "/assets/posters/thelongestyard.png",
@@ -86,6 +88,7 @@
     },
     {
         "name": "Mr. Deeds",
+        "looks": "/assets/looks/mrdeeds.png",
         "trailer": "https://www.youtube.com/watch?v=ASw47FiEhes",
         "synopsis": "Longfellow Deeds, propietario de una pizzería en Mandrake Falls, Nuevo Hampshire, está a punto de heredar 40 000 millones de dólares de un pariente lejano. Con la ayuda de su ayudante, Emilio, Deeds descubre el verdadero significado de la vida y demuestra que el dinero puede cambiarlo todo, pero no a todo el mundo.",
         "poster": "/assets/posters/mrdeeds.png",
@@ -94,6 +97,7 @@
     },
     {
         "name": "Pixels",
+        "looks": "/assets/looks/pixels.png",
         "trailer": "https://www.youtube.com/watch?v=XAHprLW48no",
         "synopsis": "Los extraterrestres malinterpretan los juegos de arcade como una declaración de guerra y atacan la Tierra utilizando juegos clásicos como PAC-MAN, Donkey Kong, Galaga, Centipede y Space Invaders. El presidente Cooper recurre a Sam Brenner y su equipo para derrotar a los extraterrestres.",
         "poster": "/assets/posters/pixels.png",
@@ -102,6 +106,7 @@
     },
     {
         "name": "Punch-Drunk Love",
+        "looks": "/assets/looks/punchdrunklove.png",
         "trailer": "https://www.youtube.com/watch?v=KGqn5k227HY",
         "synopsis": "Barry Egan, ejecutivo de una empresa de artículos de tocador novedosos, lucha contra el maltrato y la falta de amor de sus siete hermanas. Conoce a Lena Leonard, una mujer misteriosa e intensa, que le pide que le arregle su coche averiado, lo que da inicio a su aventura romántica.",
         "poster": "/assets/posters/punchdrunklove.png",
@@ -110,6 +115,7 @@
     },
     {
         "name": "Reign Over Me",
+        "looks": "/assets/looks/reignoverme.png",
         "trailer": " https://www.youtube.com/watch?v=yzQYokimcg0",
         "synopsis": "Un hombre que perdió a su familia el 11 de septiembre en Nueva York se encuentra con su antiguo compañero de cuarto de la universidad. Reavivar la amistad es lo único que parece ser capaz de ayudar al hombre a recuperarse del dolor.",
         "poster": "/assets/posters/reignoverme.png",
@@ -118,6 +124,7 @@
     },
     {
         "name": "Shakes the Clown",
+        "looks": "/assets/looks/shakestheclown.png",
         "trailer": "https://www.youtube.com/watch?v=V7KOt3Hugd4",
         "synopsis": "Shakes, un payaso de fiestas se pasa el tiempo libre emborrachándose. Su jefe le amenaza con despedirlo si no controla su comportamiento. Cuando su jefe es asesinado, Shakes se infiltra, haciéndose pasar por un mimo odiado, para encontrar información que limpie su nombre.",
         "poster": "/assets/posters/shakestheclown.png",
@@ -135,6 +142,7 @@
     },
     {
         "name": "Thats My Boy",
+        "looks": "/assets/looks/thatsmyboy.png",
         "trailer": "https://www.youtube.com/watch?v=SSDzVO_5NhU",
         "synopsis": "Donny tuvo a su hijo Todd cuando era un adolescente y lo crió como padre soltero hasta que cumplió 18 años. Tras años sin verse, el mundo de Todd se colapsa cuando Donny reaparece justo antes de su boda.",
         "poster": "/assets/posters/thatsmyboy.png",
@@ -143,6 +151,7 @@
     },
     {
         "name": "You Dont Mess with the Zohan",
+        "looks": "/assets/looks/youdontmesswiththezohan.png",
         "trailer": "https://www.youtube.com/watch?v=ucmnTmYpGhI",
         "synopsis": "Sandler interpreta a Zohan, un comando israelí que finge su propia muerte para perseguir su sueño: convertirse en peluquero en Nueva York.",
         "poster": "/assets/posters/youdontmesswiththezohan.png",
