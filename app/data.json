@@ -19,14 +19,16 @@
     },
     {
         "name": "Anger Management",
+        "looks": "/assets/looks/angrymanager.png",
         "trailer": "https://www.youtube.com/watch?v=jA_j1WNDd_Q",
-        "synopsis": "Dave Buznik, un hombre de negocios tranquilo es enviado a un programa de control de la ira tras un altercado en un avión. Su instructor, el Dr. Buddy Rydell, tiene un grave problema de ira, que se hace evidente cuando Rydell enseña a Dave a “comportarse con calma”.",
+        "synopsis": "Dave Buznik, un hombre de negocios tranquilo es enviado a un programa de control de la ira tras un altercado en un avión. Su instructor, el Dr. Buddy Rydell, tiene un grave problema de ira, que se hace evidente cuando Rydell enseña a Dave a 'comportarse con calma'.",
         "poster": "/assets/posters/angermanagement.png",
         "release": "11 de abril del 2003",
         "logo": "/assets/movies/angermanagement.svg"
     },
     {
         "name": "Big Daddy",
+        "looks": "/assets/looks/biddaddy.png",
         "trailer": "https://www.youtube.com/watch?v=hjPA1OPC9qU",
         "synopsis": "Sonny es un abogado treintañero al que nunca le ha gustado asumir las responsabilidades de un adulto. Después de que su última novia lo abandonará por su inmadurez, decide hacer algo drástico que cambie su vida: adoptar a un niño de 5 años.",
         "poster": "/assets/posters/bigdaddy.png",
@@ -51,6 +53,7 @@
     },
     {
         "name": "Hotel Transylvania",
+        "looks": "/assets/looks/hoteltransilvania.png",
         "trailer": "https://www.youtube.com/watch?v=q4RK3jY7AVk",
         "synopsis": "Bienvenidos al Hotel Transilvania, el lujoso complejo turístico de cinco estrellas de Drácula, donde los monstruos y sus familias pueden disfrutar a lo grande y no se admiten humanos.",
         "poster": "/assets/posters/hoteltransylvania.png",
@@ -123,6 +126,7 @@
     },
     {
         "name": "Spanglish",
+        "looks": "/assets/looks/spanglish.png",
         "trailer": "https://www.youtube.com/watch?v=--2IG_rxfUM",
         "synopsis": "Cuando una adinerada familia de Los Ángeles contrata una bella ama de casa mexicana, la vida de todos da vuelta de manera alegremente alocada en esta comedia de modales y caos.",
         "poster": "/assets/posters/spanglish.png",
