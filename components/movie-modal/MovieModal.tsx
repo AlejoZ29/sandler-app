@@ -107,7 +107,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
       'reignoverme': '/assets/looks/reignoverme.png',
       'youdontmesswiththezohan': '/assets/looks/youdontmesswiththezohan.png',
       'punchdrunkloveme': '/assets/looks/punchdrunklove.png',
-      '50firstdates': '/assets/looks/50firstdatesates.png',
+      '50firstdates': '/assets/looks/50firstdates.png',
       'pixels': '/assets/looks/pixels.png',
       'eightcrazynights': '/assets/looks/eightcrazynights.png',
       'angrymanager': '/assets/looks/angrymanager.png',
