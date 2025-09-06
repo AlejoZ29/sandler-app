@@ -1,6 +1,5 @@
 'use client';
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { Button } from '@/components';
 import { Counter } from '@/components/counter/Counter';
 import moviesData from '@/app/data.json';
@@ -97,12 +96,10 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
               >
                 <div className="relative w-full aspect-[2/3] rounded-lg overflow-hidden border-2 border-transparent bg-gradient-to-r from-yellow-200 via-yellow-600 to-yellow-200 p-[2px] transition-all duration-300 hover:scale-105 hover:shadow-lg opacity-100">
                   <div className="relative w-full h-full rounded-lg overflow-hidden bg-gray-800">
-                    <Image
+                    <img
                       src={movie.poster}
                       alt={movie.name}
-                      fill
-                      sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
-                      className="object-cover"
+                      className="w-full h-full object-cover"
                       onError={(e) => {
                         console.log(`Error loading image for ${movie.name}: ${movie.poster}`);
                         e.currentTarget.style.display = 'none';

@@ -220,7 +220,7 @@ export const RegistrationForm = () => {
     <div className="min-h-screen max-h-screen overflow-hidden flex flex-col items-center justify-center mx-12 lg:mx-auto lg:grid lg:grid-cols-12">
       <div className="col-start-8 col-end-12 w-full mx-12 lg:mx-auto max-w-[600px] h-full max-h-screen overflow-y-auto overflow-x-hidden py-4 flex flex-col justify-center scrollbar-hide">
         <div className="mb-8">
-          <Logo/>
+          <Logo textClasses="lg:mt-0 text-center"/>
         </div>
 
         <form className="w-full max-w space-y-4" onSubmit={handleSubmit}>
