@@ -44,7 +44,7 @@ export const BackstageModal: React.FC<BackstageModalProps> = ({
       'punchdrunkloveme': 'Punch-Drunk Love',
       '50firstdates': '50 First Dates',
       'pixels': 'Pixels',
-      'eightcrazynights': "Adam Sandler's Eight Crazy Nights",
+      'eightcrazynights': "Eight Crazy Nights",
       'angrymanager': 'Anger Management',
       'justgowithit': 'Just Go With It',
       'thelongestyard': 'The Longest Yard'
