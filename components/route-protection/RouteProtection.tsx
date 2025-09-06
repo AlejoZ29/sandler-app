@@ -20,12 +20,12 @@ export const RouteProtection: React.FC<RouteProtectionProps> = ({
   // Check if route protection is disabled for development
   const isRouteProtectionDisabled = process.env.NEXT_PUBLIC_DISABLE_ROUTE_PROTECTION === 'true';
 
-  // If route protection is disabled, render children directly
-  if (isRouteProtectionDisabled) {
-    return <>{children}</>;
-  }
-
   useEffect(() => {
+    // Skip effect if route protection is disabled
+    if (isRouteProtectionDisabled) {
+      return;
+    }
+
     // Si requiere verificación y no está verificado, redirigir al inicio
     if (requireVerification && !isVerified) {
       router.replace('/');
@@ -41,7 +41,12 @@ export const RouteProtection: React.FC<RouteProtectionProps> = ({
       }
       return;
     }
-  }, [isVerified, isFormCompleted, requireVerification, requireFormCompletion, router]);
+  }, [isVerified, isFormCompleted, requireVerification, requireFormCompletion, router, isRouteProtectionDisabled]);
+
+  // If route protection is disabled, render children directly
+  if (isRouteProtectionDisabled) {
+    return <>{children}</>;
+  }
 
   // Si se requiere verificación y no está verificado, no mostrar contenido
   if (requireVerification && !isVerified) {
