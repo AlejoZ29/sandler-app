@@ -14,12 +14,11 @@ export default function HomePage() {
   const [isMuted, setIsMuted] = useState(false);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   const audioPlayerRef = useRef<AudioPlayerRef>(null);
-  const { clickedImages, handleImageClick } = useGame();
+  const { clickedImages, handleImageClick, congratsModalOpen, closeCongratsModal, openCongratsModal } = useGame();
   
   // Modal state
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState<string | null>(null);
-  const [congratsModalOpen, setCongratModalOpen] = useState(false);
   const totalImages = 19; // Número total de películas ocultas
 
   useEffect(() => {
@@ -75,7 +74,7 @@ export default function HomePage() {
       
       // Si después de agregar esta imagen tenemos exactamente 10, mostrar CongratsModal
       if (clickedImages.size + 1 === 10) {
-        setCongratModalOpen(true);
+        openCongratsModal();
       } else {
         setSelectedMovie(polylineName);
         setModalOpen(true);
@@ -90,9 +89,6 @@ export default function HomePage() {
     }
   };
 
-  const closeCongratModal = () => {
-    setCongratModalOpen(false);
-  };
 
   return (
     <RouteProtection requireFormCompletion={true}>
@@ -589,7 +585,12 @@ export default function HomePage() {
         isOpen={congratsModalOpen}
         clickedImages={clickedImages}
         totalImages={totalImages}
-        onClose={closeCongratModal}
+        onClose={closeCongratsModal}
+        onMovieSelect={(movieName: string) => {
+          setSelectedMovie(movieName);
+          setModalOpen(true);
+          closeCongratsModal(); // Cerrar el CongratsModal
+        }}
       />
       </div>
     </RouteProtection>

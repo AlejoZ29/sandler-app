@@ -9,6 +9,7 @@ interface CongratsModalProps {
   clickedImages: Set<string>;
   totalImages: number;
   onClose: () => void;
+  onMovieSelect: (movieName: string) => void;
 }
 
 export const CongratsModal: React.FC<CongratsModalProps> = ({
@@ -16,6 +17,7 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
   clickedImages,
   totalImages,
   onClose,
+  onMovieSelect,
 }) => {
   const [hoveredMovie, setHoveredMovie] = useState<string | null>(null);
   const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
@@ -34,6 +36,38 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
   const truncateText = (text: string, maxLength: number = 150) => {
     if (text.length <= maxLength) return text;
     return text.substr(0, maxLength) + '...';
+  };
+
+  // Mapeo inverso: de nombres de data.json a claves esperadas por MovieModal
+  const getMovieKey = (movieName: string): string => {
+    const movieKeyMap: { [key: string]: string } = {
+      'Big Daddy': 'bigdaddy',
+      'Spanglish': 'spanglish',
+      'Mr. Deeds': 'mrdeeds',
+      'Click': 'clic',
+      'Zookeeper': 'zookeeper',
+      'Shakes the Clown': 'shakestheclown',
+      'Hotel Transylvania': 'hoteltransylvania',
+      'Grown Ups': 'grownups',
+      'Jack and Jill': 'jackandjill',
+      'Thats My Boy': 'thatsmyboy',
+      'Reign Over Me': 'reignoverme',
+      'You Dont Mess with the Zohan': 'youdontmesswiththezohan',
+      'Punch-Drunk Love': 'punchdrunkloveme',
+      '50 First Dates': '50firstdates',
+      'Pixels': 'pixels',
+      'Eight Crazy Nights': 'eightcrazynights',
+      'Anger Management': 'angrymanager',
+      'Just Go With It': 'justgowithit',
+      'The Longest Yard': 'thelongestyard',
+    };
+
+    return movieKeyMap[movieName] || movieName.toLowerCase().replace(/\s+/g, '');
+  };
+
+  const handleMovieClick = (movieName: string) => {
+    const movieKey = getMovieKey(movieName);
+    onMovieSelect(movieKey);
   };
 
   return (
@@ -67,22 +101,33 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
           {/* Título y texto de congratulaciones */}
           <div className="text-center mb-8 max-w-4xl">
             <h1 className="text-4xl lg:text-6xl font-bold text-yellow-300 mb-6">
-              ¡Felicitaciones!
+              {clickedImages.size !== 10 ? 'Inventario de películas' : '¡Felicitaciones!'}
             </h1>
-            <p className="text-xl lg:text-2xl text-white mb-4">
-              Has completado con éxito el reto de encontrar los <span className="text-yellow-300 font-bold">10 elementos de película</span>.
-            </p>
-            <p className="text-lg lg:text-xl text-white mb-6">
-              Ahora puedes ver el <span className="text-yellow-300 font-bold">inventario completo de películas</span> de que tenemos para complementar tu oferta.
-            </p>
-            <div className="flex items-center justify-center space-x-4 mb-8">
-              <div className="flex-1 h-px bg-gradient-to-r from-transparent to-yellow-400"></div>
-              <span className="text-lg lg:text-xl text-yellow-300 font-medium px-4">
-                PORQUE NO HAY NADA MEJOR QUE ESTAR A LA MODA,<br />
-                Y ESTAR A LA MODA ES TENER A ADAM SANDLER EN TU PANTALLA
-              </span>
-              <div className="flex-1 h-px bg-gradient-to-l from-transparent to-yellow-400"></div>
-            </div>
+            {clickedImages.size !== 10 && (
+              <p className="text-lg lg:text-xl text-white mb-6">
+                Ahora puedes ver el inventario completo de películas de que tenemos para complementar tu oferta.
+              </p>
+            )}
+
+
+            {clickedImages.size === 10 && (
+              <>
+                <p className="text-xl lg:text-2xl text-white mb-4">
+                  Has completado con éxito el reto de encontrar los <span className="text-yellow-300 font-bold">10 elementos de película</span>.
+                </p>
+                <p className="text-lg lg:text-xl text-white mb-6">
+                  Ahora puedes ver el <span className="text-yellow-300 font-bold">inventario completo  de películas</span> de que tenemos para complementar tu oferta.
+                </p>
+                <div className="flex items-center justify-center space-x-4 mb-8">
+                  <div className="flex-1 h-px bg-gradient-to-r from-transparent to-yellow-400"></div>
+                  <span className="text-lg lg:text-xl text-yellow-300 font-medium px-4">
+                    PORQUE NO HAY NADA MEJOR QUE ESTAR A LA MODA,<br />
+                    Y ESTAR A LA MODA ES TENER A ADAM SANDLER EN TU PANTALLA
+                  </span>
+                  <div className="flex-1 h-px bg-gradient-to-l from-transparent to-yellow-400"></div>
+                </div>
+              </>
+            )}
           </div>
 
           {/* Grid de películas */}
@@ -93,6 +138,7 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
                 className="relative group cursor-pointer"
                 onMouseEnter={() => setHoveredMovie(movie.name)}
                 onMouseLeave={() => setHoveredMovie(null)}
+                onClick={() => handleMovieClick(movie.name)}
               >
                 <div className="relative w-full aspect-[2/3] rounded-lg overflow-hidden border-2 border-transparent bg-gradient-to-r from-yellow-200 via-yellow-600 to-yellow-200 p-[2px] transition-all duration-300 hover:scale-105 hover:shadow-lg opacity-100">
                   <div className="relative w-full h-full rounded-lg overflow-hidden bg-gray-800">
@@ -107,14 +153,14 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
                       }}
                       onLoad={() => console.log(`Successfully loaded image for ${movie.name}`)}
                     />
-                    
+
                     {imageErrors.has(movie.name) && (
                       <div className="absolute inset-0 w-full h-full bg-gray-700 flex flex-col items-center justify-center text-white p-2">
                         <div className="text-2xl mb-2">🎬</div>
                         <p className="text-xs text-center leading-tight">{movie.name}</p>
                       </div>
                     )}
-                    
+
                     {/* Overlay con información al hacer hover */}
                     {hoveredMovie === movie.name && (
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent flex flex-col justify-end p-3 text-white opacity-100">

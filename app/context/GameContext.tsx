@@ -5,6 +5,9 @@ interface GameContextType {
   clickedImages: Set<string>;
   totalImages: number;
   handleImageClick: (imageName: string) => void;
+  congratsModalOpen: boolean;
+  openCongratsModal: () => void;
+  closeCongratsModal: () => void;
 }
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
@@ -19,6 +22,7 @@ export const useGame = () => {
 
 export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   const [clickedImages, setClickedImages] = useState<Set<string>>(new Set());
+  const [congratsModalOpen, setCongratsModalOpen] = useState(false);
   const totalImages = 19;
 
   useEffect(() => {
@@ -47,11 +51,17 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
     });
   };
 
+  const openCongratsModal = () => setCongratsModalOpen(true);
+  const closeCongratsModal = () => setCongratsModalOpen(false);
+
   return (
     <GameContext.Provider value={{
       clickedImages,
       totalImages,
-      handleImageClick
+      handleImageClick,
+      congratsModalOpen,
+      openCongratsModal,
+      closeCongratsModal
     }}>
       {children}
     </GameContext.Provider>
