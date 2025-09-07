@@ -73,14 +73,14 @@ export const VerificationFlow = () => {
       <div className="spotlight-center"></div>
       <div className="spotlight-left"></div>
       <div className="spotlight-right"></div>
-      <div className={`transition-all duration-500 ease-in-out w-full  ${isVerifying ? 'transform -translate-y-8 scale-75' : ''}`}>
+      <div className={`transition-all duration-500 ease-in-out  ${isVerifying ? 'transform -translate-y-8 scale-75' : ''}`}>
         {!isVerifying && (
           <Image
             src="/assets/thesandlerstyle.svg"
             width={450}
             height={450}
             alt="Logo Sandlers Show"
-            className="transition-all duration-500 ease-in-out mx-auto lg:w-[300px] 2xl:w-[400px] max-w-[500px] 2xl:mb-12"
+            className="transition-all duration-500 ease-in-out mx-auto lg:w-[300px] 2xl:w-[350px] 2xl:mb-12"
           />)}
         <p className={`${isVerifying ? '-mt- lg:mt-0 -mb-10' : '-mt-2 lg:mt-0'} mt-5 text-center mx-auto shadow-amber-300 text-xl  lg:text-2xl text-white font-medium transition-all duration-500 md:w-[500px]`}>
           {isVerifying
@@ -102,7 +102,7 @@ export const VerificationFlow = () => {
       )}
 
       {!isVerifying && (
-        <Button  disabled={isVerifying} textButton="Ingresar" callToAction={handleEnterClick} />
+        <Button classes="mt-5"  disabled={isVerifying} textButton="Ingresar" callToAction={handleEnterClick} />
       )}
     </div>
   );
