@@ -156,7 +156,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
       >
         <button
           onClick={handleCloseButtonClick}
-          className="hidden 2xl:block absolute bottom-[35%] lg:-top-4 lg:bottom-[90%] right-0 lg:right-4 text-yellow-400 hover:text-white transition-colors duration-300 z-10 opacity-100 scale-10 xl:scale-100"
+          className="hidden 2xl:block absolute bottom-[35%] lg:-top-4 lg:bottom-[90%] -right-[30%] lg:left-[90%] text-yellow-400 hover:text-white transition-colors duration-300 z-10 opacity-100 scale-10 xl:scale-100"
         >
           <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
             <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
@@ -165,7 +165,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
 
         <div className="flex flex-col-reverse 2xl:grid 2xl:grid-cols-4 gap-8 h-full p-8 lg:p-32 opacity-100 overflow-auto">
 
-        <div className="flex 2xl:hidden  justify-center 2xl:justify-start mt-12 my-6 md:my-0">
+          <div className="flex 2xl:hidden  justify-center 2xl:justify-start mt-12 my-6 md:my-0">
             <Button
               callToAction={handleContinueClick}
               classes="px-8 py-3 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-black hover:from-yellow-300 hover:to-yellow-400 transition-all duration-300 font-medium shadow-lg"

@@ -86,7 +86,7 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
       >
         <button
           onClick={handleCloseButtonClick}
-          className="hidden 2xl:block absolute bottom-[35%] lg:-top-4 lg:bottom-[90%] -right-[30%] lg:right-[90%] text-yellow-400 hover:text-white transition-colors duration-300 z-10 opacity-100 scale-10 xl:scale-100"
+          className="hidden 2xl:block absolute bottom-[35%] lg:-top-4 lg:bottom-[90%] -right-[30%] lg:left-[90%] text-yellow-400 hover:text-white transition-colors duration-300 z-10 opacity-100 scale-10 xl:scale-100"
         >
           <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
             <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />

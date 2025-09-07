@@ -80,7 +80,7 @@ export const VerificationFlow = () => {
             width={450}
             height={450}
             alt="Logo Sandlers Show"
-            className="transition-all duration-500 ease-in-out mx-auto w-500 lg:w-[300px] 2xl:w-[500px] 2xl:mb-12"
+            className="transition-all duration-500 ease-in-out mx-auto w-500 lg:w-[300px] 2xl:w-[500px] max-w-[500px] 2xl:mb-12"
           />)}
         <p className={`${isVerifying ? '-mt- lg:mt-0 -mb-10' : '-mt-2 lg:mt-0'} mt-5 text-center mx-auto shadow-amber-300 text-xl  lg:text-2xl text-white font-medium transition-all duration-500 md:w-[500px]`}>
           {isVerifying
