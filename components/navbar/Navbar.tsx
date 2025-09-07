@@ -26,11 +26,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBackstage }) => {
         </div>
       ) : (
         <>
-          <div className="hidden md:flex items-center pl-32 scale-70 lg:scale-100">
+          <div className="hidden md:flex items-center pl-32 2xl:pl-50 scale-70 lg:scale-100">
             <SonyLogo />
           </div>
 
-          <div className="flex items-center gap-4 md:gap-10 pr-32 scale-70 lg:scale-100">
+          <div className="flex items-center gap-4 md:gap-10 pr-32 2xl:pr-50 scale-70 lg:scale-100">
             {isHome && (
               <>
                 <Backstage
