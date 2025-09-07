@@ -20,7 +20,7 @@ export const ControlButtons: React.FC<ControlButtonsProps> = ({
   const isDevMode = process.env.NEXT_PUBLIC_DISABLE_ROUTE_PROTECTION === 'true';
 
   return (
-    <div className="fixed bottom-0 lg:bottom-6 right-6 flex gap-3 z-[40] mr-32 scale-70 lg:scale-100">
+    <div className="fixed bottom-0 lg:bottom-6 right-6 flex gap-3 z-[40] mr-32 2xl:mr-50 scale-70 lg:scale-100">
       {/* Mute/Unmute Button */}
       <button
         onClick={onToggleMute}
