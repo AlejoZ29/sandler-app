@@ -275,13 +275,13 @@ export const MovieModal: React.FC<MovieModalProps> = ({
                   </div>
                 </div>
 
-                {/* Fecha de estreno */}
+                {/* Fecha de estreno 
                 <div className="text-left">
                   <p className="text-white text-sm lg:text-base leading-relaxed font-bold mb-2">Fecha de estreno:</p>
                   <p className="text-white text-sm lg:text-base leading-relaxed">
                     {movieData.release}
                   </p>
-                </div>
+                </div>*/}
 
                 {/* Línea horizontal */}
                 <div className="h-px bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-200"></div>

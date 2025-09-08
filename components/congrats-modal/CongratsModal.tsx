@@ -34,10 +34,10 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
   const handleContinueClick = () => onClose();
 
   // Función para truncar el texto de la sinopsis
-  const truncateText = (text: string, maxLength: number = 150) => {
-    if (text.length <= maxLength) return text;
-    return text.substr(0, maxLength) + '...';
-  };
+  //  const truncateText = (text: string, maxLength: number = 150) => {
+   // if (text.length <= maxLength) return text;
+    //return text.substr(0, maxLength) + '...';
+  //};
 
   // Mapeo inverso: de nombres de data.json a claves esperadas por MovieModal
   const getMovieKey = (movieName: string): string => {
@@ -166,14 +166,14 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
                     {/* Overlay con información al hacer hover */}
                     {hoveredMovie === movie.name && (
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent flex flex-col justify-end p-3 text-white opacity-100">
-                        <h3 className="font-bold text-sm lg:text-base mb-1 leading-tight">
+                        {/* <h3 className="font-bold text-sm lg:text-base mb-1 leading-tight">
                           {movie.name}
                         </h3>
                         <p className="text-xs lg:text-sm text-yellow-300 mb-2">
                           {movie.release}
-                        </p>
+                        </p>*/}
                         <p className="text-xs leading-tight">
-                          {truncateText(movie.synopsis, 100)}
+                          {movie.synopsis}
                         </p>
                       </div>
                     )}
