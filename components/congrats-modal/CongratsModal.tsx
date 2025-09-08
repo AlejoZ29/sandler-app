@@ -114,16 +114,15 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
             {clickedImages.size === 10 && (
               <>
                 <p className="text-xl lg:text-2xl text-white mb-4">
-                  Has completado con éxito el reto de encontrar los <span className="text-yellow-300 font-bold">10 elementos de película</span>.
+                  Has completado con éxito el reto de encontrar los <span className="text-yellow-300 font-bold">10 elementos ocultos.</span>.
                 </p>
                 <p className="text-lg lg:text-xl text-white mb-6">
-                  Ahora puedes ver el <span className="text-yellow-300 font-bold">inventario completo  de películas</span> de que tenemos para complementar tu oferta.
+                  Conoce todas las películas disponibles de Sony Pictures con Adam Sandler para que tu pantalla siempre este a la moda
                 </p>
                 <div className="flex items-center justify-center space-x-4 mb-8">
                   <div className="flex-1 h-px bg-gradient-to-r from-transparent to-yellow-400"></div>
                   <span className="text-lg lg:text-xl text-yellow-300 font-medium px-4">
-                    PORQUE NO HAY NADA MEJOR QUE ESTAR A LA MODA,<br />
-                    Y ESTAR A LA MODA ES TENER A ADAM SANDLER EN TU PANTALLA
+                    PORQUE ESTAR A LA MODA ES TENERLO EN TU PANTALLA,<br />
                   </span>
                   <div className="flex-1 h-px bg-gradient-to-l from-transparent to-yellow-400"></div>
                 </div>
@@ -148,7 +147,7 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
                       alt={movie.name}
                       width={300}
                       height={500}
-                      className="w-full h-full object-cover"    
+                      className="w-full h-full object-cover"
                       onError={(e) => {
                         console.log(`Error loading image for ${movie.name}: ${movie.poster}`);
                         e.currentTarget.style.display = 'none';

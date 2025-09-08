@@ -198,7 +198,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
             {/* Trailer de YouTube */}
             {movieData && movieData.trailer && (
               <div className="flex flex-col items-center justify-center">
-                <div className="w-[90%] h-[500px]">
+                <div className="w-[70%] h-[350px]">
                   {getYouTubeEmbedUrl(movieData.trailer) && getYouTubeEmbedUrl(movieData.trailer).trim() !== '' ? (
                     <iframe
                       width="100%"
