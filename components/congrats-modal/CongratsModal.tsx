@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components';
 import { Counter } from '@/components/counter/Counter';
@@ -22,6 +22,7 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
 }) => {
   const [hoveredMovie, setHoveredMovie] = useState<string | null>(null);
   const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   if (!isOpen) return null;
 
@@ -29,9 +30,21 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
     setImageErrors(prev => new Set([...prev, movieName]));
   };
 
-  const handleBackdropClick = () => onClose();
-  const handleCloseButtonClick = () => onClose();
-  const handleContinueClick = () => onClose();
+  const resetScrollAndClose = () => {
+    try {
+      if (typeof window !== 'undefined') {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+      }
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+      }
+    } catch {}
+    onClose();
+  };
+
+  const handleBackdropClick = () => resetScrollAndClose();
+  const handleCloseButtonClick = () => resetScrollAndClose();
+  const handleContinueClick = () => resetScrollAndClose();
 
   // Función para truncar el texto de la sinopsis
   //  const truncateText = (text: string, maxLength: number = 150) => {
@@ -83,6 +96,7 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
         style={{
           background: 'linear-gradient(to right, #010204, #214457, #0C1115)'
         }}
+        ref={scrollContainerRef}
       >
         <button
           onClick={handleCloseButtonClick}

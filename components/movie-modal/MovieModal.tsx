@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components';
 import { Counter } from '@/components/counter/Counter';
@@ -22,6 +22,8 @@ export const MovieModal: React.FC<MovieModalProps> = ({
 }) => {
   const [movieImageError, setMovieImageError] = useState(false);
   const [lookImageError, setLookImageError] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const contentScrollRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (selectedMovie) {
@@ -32,9 +34,24 @@ export const MovieModal: React.FC<MovieModalProps> = ({
 
   if (!isOpen || !selectedMovie) return null;
 
-  const handleBackdropClick = () => onClose(true);
-  const handleCloseButtonClick = () => onClose(true);
-  const handleContinueClick = () => onClose(true);
+  const resetScrollAndClose = () => {
+    try {
+      if (typeof window !== 'undefined') {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+      }
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+      }
+      if (contentScrollRef.current) {
+        contentScrollRef.current.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+      }
+    } catch {}
+    onClose(true);
+  };
+
+  const handleBackdropClick = () => resetScrollAndClose();
+  const handleCloseButtonClick = () => resetScrollAndClose();
+  const handleContinueClick = () => resetScrollAndClose();
 
   // Función para convertir URL de YouTube a embed
   const getYouTubeEmbedUrl = (url: string) => {
@@ -153,6 +170,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
         style={{
           background: 'linear-gradient(to right, #010204, #214457, #0C1115)'
         }}
+        ref={scrollContainerRef}
       >
         <button
           onClick={handleCloseButtonClick}
@@ -163,9 +181,9 @@ export const MovieModal: React.FC<MovieModalProps> = ({
           </svg>
         </button>
 
-        <div className="flex flex-col-reverse 2xl:grid 2xl:grid-cols-4 gap-8 h-full p-8 lg:p-32 opacity-100 overflow-auto">
+        <div ref={contentScrollRef} className="flex flex-col-reverse xl:grid xl:grid-cols-4 gap-8 h-full p-8 lg:p-32 opacity-100 overflow-auto">
 
-          <div className="flex 2xl:hidden  justify-center 2xl:justify-start mt-12 my-6 md:my-0">
+          <div className="flex xl:hidden justify-center xl:justify-start mt-12 my-6 md:my-0">
             <Button
               callToAction={handleContinueClick}
               classes="px-8 py-3 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-black hover:from-yellow-300 hover:to-yellow-400 transition-all duration-300 font-medium shadow-lg"
@@ -300,7 +318,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
                 </div>
 
                 {/* Botón Continuar */}
-                <div className="hidden 2xl:flex justify-center 2xl:justify-start mt-12 my-6 md:my-0">
+                <div className="hidden xl:flex justify-center xl:justify-start mt-12 my-6 md:my-0">
                   <Button
                     callToAction={handleContinueClick}
                     classes="px-8 py-3 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-black hover:from-yellow-300 hover:to-yellow-400 transition-all duration-300 font-medium shadow-lg"
