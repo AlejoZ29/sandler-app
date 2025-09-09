@@ -175,6 +175,9 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
                         <p className="text-xs leading-tight">
                           {movie.synopsis}
                         </p>
+                        <p className="text-xs lg:text-sm my-2">
+                          {movie.name === "Hotel Transylvania" || movie.name === "Grown Ups" ? movie?.adds : ''}
+                        </p>
                       </div>
                     )}
                   </div>

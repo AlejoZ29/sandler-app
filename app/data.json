@@ -49,7 +49,8 @@
         "synopsis": "Treinta años después de graduarse del colegio, cinco antiguos compañeros de equipo de baloncesto se reúnen en una casa junto al lago para recordar a su difunto entrenador. A pesar de haber crecido y formado familias, se dan cuenta de que la edad adulta consiste en aprovecharla al máximo, y ninguno está dispuesto a ser el adulto del grupo.",
         "poster": "/assets/posters/grownups.png",
         "release": "2010",
-        "logo": "/assets/movies/grownups.svg"
+        "logo": "/assets/movies/grownups.svg",
+        "adds": "DISPONIBLE TAMBIÉN: Grown Ups 2"
     },
     {
         "name": "Hotel Transylvania",
@@ -58,7 +59,8 @@
         "synopsis": "Bienvenidos al Hotel Transilvania, el lujoso complejo turístico de cinco estrellas de Drácula, donde los monstruos y sus familias pueden disfrutar a lo grande y no se admiten humanos.",
         "poster": "/assets/posters/hoteltransylvania.png",
         "release": "2012",
-        "logo": "/assets/movies/hoteltransylvania.svg"
+        "logo": "/assets/movies/hoteltransylvania.svg",
+        "adds": "DISPONIBLE TAMBIÉN: Hotel Transylvania 2 & 3"
     },
     {
         "name": "Jack and Jill",
