@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components';
 import { Counter } from '@/components/counter/Counter';
@@ -22,6 +22,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
 }) => {
   const [movieImageError, setMovieImageError] = useState(false);
   const [lookImageError, setLookImageError] = useState(false);
+  const resetCancelledRef = useRef(false);
 
   useEffect(() => {
     if (selectedMovie) {
@@ -29,6 +30,43 @@ export const MovieModal: React.FC<MovieModalProps> = ({
       setLookImageError(false);
     }
   }, [selectedMovie]);
+
+  // Ensure modal scroll starts at top on open (all screens)
+  const resetScrollPositions = () => {
+    if (resetCancelledRef.current) return;
+    try {
+      const outer = document.getElementById('movie-modal-outer');
+      const inner = document.getElementById('movie-modal-inner');
+      if (outer) {
+        outer.scrollTop = 0;
+        outer.scrollLeft = 0;
+      }
+      if (inner) {
+        const computed = window.getComputedStyle(inner);
+        const isReversed = computed.display.includes('flex') && computed.flexDirection === 'column-reverse';
+        (inner as HTMLElement).scrollTop = isReversed ? (inner as HTMLElement).scrollHeight : 0;
+        (inner as HTMLElement).scrollLeft = 0;
+      }
+    } catch {}
+  };
+
+  const cancelFurtherResets = () => {
+    resetCancelledRef.current = true;
+  };
+
+  useEffect(() => {
+    if (!isOpen) return;
+    resetCancelledRef.current = false;
+    const run = () => resetScrollPositions();
+    run();
+    const raf = requestAnimationFrame(run);
+    const t = setTimeout(run, 120);
+    return () => {
+      resetCancelledRef.current = true;
+      cancelAnimationFrame(raf);
+      clearTimeout(t);
+    };
+  }, [isOpen, selectedMovie]);
 
   if (!isOpen || !selectedMovie) return null;
 
@@ -149,10 +187,11 @@ export const MovieModal: React.FC<MovieModalProps> = ({
       />
 
       <div
-        className="relative w-full h-full shadow-2xl border border-yellow-400/30 opacity-60 overflow-auto xl:overflow-hidden"
+        className="relative w-full h-full shadow-2xl border border-yellow-400/30 opacity-60 overflow-hidden"
         style={{
           background: 'linear-gradient(to right, #010204, #214457, #0C1115)'
         }}
+        id="movie-modal-outer"
       >
         <button
           onClick={handleCloseButtonClick}
@@ -163,9 +202,9 @@ export const MovieModal: React.FC<MovieModalProps> = ({
           </svg>
         </button>
 
-        <div className="flex flex-col-reverse xl:grid xl:grid-cols-4 gap-8 h-full p-8 lg:p-32 opacity-100 overflow-auto xl:overflow-hidden">
+        <div className="flex flex-col xl:grid xl:grid-cols-4 gap-8 h-full p-8 lg:p-32 opacity-100 overflow-auto" id="movie-modal-inner" style={{ overflowAnchor: 'none' }} onScroll={cancelFurtherResets} onWheel={cancelFurtherResets} onTouchStart={cancelFurtherResets}>
 
-          <div className="flex xl:hidden justify-center xl:justify-start mt-12 my-6 md:my-0">
+          <div className="flex xl:hidden justify-center xl:justify-start mt-12 my-6 md:my-0 order-3 xl:order-none">
             <Button
               callToAction={handleContinueClick}
               classes="px-8 py-3 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-black hover:from-yellow-300 hover:to-yellow-400 transition-all duration-300 font-medium shadow-lg"
@@ -173,7 +212,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
             />
           </div>
           {/* Columna izquierda: Solo Look y Trailer */}
-          <div className="flex flex-col justify-center space-y-8 col-start-1 col-end-3">
+          <div className="flex flex-col justify-center space-y-8 col-start-1 col-end-3 order-2 xl:order-none">
             {/* Look image */}
             <div className="flex items-center justify-center">
               <div className="relative">
@@ -209,6 +248,9 @@ export const MovieModal: React.FC<MovieModalProps> = ({
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
                       className="rounded-lg mr-25"
+                      tabIndex={-1}
+                      loading="lazy"
+                      onLoad={() => { if (!resetCancelledRef.current) resetScrollPositions(); }}
                     />
                   ) : (
                     <div className="w-full h-64 bg-gray-800 rounded-lg flex items-center justify-center">
@@ -221,7 +263,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
           </div>
 
           {/* Columna derecha: Todo lo demás */}
-          <div className="flex flex-col justify-center space-y-6 cols-span-4 col-start-3 col-end-5">
+          <div className="flex flex-col justify-center space-y-6 cols-span-4 col-start-3 col-end-5 order-1 xl:order-none">
             {/* Contador */}
             <div className="flex items-center justify-center">
               <Counter clickedImages={clickedImages} totalImages={totalImages} />
