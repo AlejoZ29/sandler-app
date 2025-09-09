@@ -287,9 +287,15 @@ export const MovieModal: React.FC<MovieModalProps> = ({
                 <div className="h-px bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-200"></div>
 
                 {/* Descripción */}
-                <div className="text-left mb-12">
+                <div className="text-left mb-5">
                   <p className="text-white text-sm lg:text-base leading-relaxed">
                     {movieData.synopsis}
+                  </p>
+                </div>
+
+                <div className="text-left mb-12">
+                  <p className="text-white text-sm lg:text-base leading-relaxed">
+                    {movieData.name === 'Hotel Transylvania' || movieData.name === 'Grown Ups'  ? movieData?.adds : ''}
                   </p>
                 </div>
 
