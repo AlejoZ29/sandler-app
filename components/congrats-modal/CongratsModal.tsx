@@ -35,8 +35,8 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
 
   // Función para truncar el texto de la sinopsis
   //  const truncateText = (text: string, maxLength: number = 150) => {
-   // if (text.length <= maxLength) return text;
-    //return text.substr(0, maxLength) + '...';
+  // if (text.length <= maxLength) return text;
+  //return text.substr(0, maxLength) + '...';
   //};
 
   // Mapeo inverso: de nombres de data.json a claves esperadas por MovieModal
@@ -102,9 +102,9 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
           {/* Título y texto de congratulaciones */}
           <div className="text-center mb-8 max-w-4xl">
             <h1 className="text-4xl lg:text-6xl font-bold text-yellow-300 mb-6">
-              {clickedImages.size !== 10 ? 'Inventario de películas' : '¡Felicitaciones!'}
+              {clickedImages.size !== 10 && clickedImages.size !== 19 ? 'Inventario de películas' : '¡Felicitaciones!'}
             </h1>
-            {clickedImages.size !== 10 && (
+            {clickedImages.size !== 10 && clickedImages.size !== 19 && (
               <p className="text-lg lg:text-xl text-white mb-6">
                 Ahora puedes ver el inventario completo de películas de que tenemos para complementar tu oferta.
               </p>
@@ -122,7 +122,23 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
                 <div className="flex items-center justify-center space-x-4 mb-8">
                   <div className="flex-1 h-px bg-gradient-to-r from-transparent to-yellow-400"></div>
                   <span className="text-lg lg:text-xl text-yellow-300 font-medium px-4">
-                    PORQUE ESTAR A LA MODA ES TENERLO EN TU PANTALLA,<br />
+                    PORQUE ESTAR A LA MODA ES TENERLO EN TU PANTALLA<br />
+                  </span>
+                  <div className="flex-1 h-px bg-gradient-to-l from-transparent to-yellow-400"></div>
+                </div>
+              </>
+            )}
+
+            {clickedImages.size === 19 && (
+              <>
+                <p className="text-xl lg:text-2xl text-white mb-4">
+                  Definitivamente The Sandler Cinematic Style vive en ti
+                  <span className="text-yellow-300 font-bold"> The Sandler Cinematic Style</span> vive en ti.
+                </p>
+                <div className="flex items-center justify-center space-x-4 mb-8">
+                  <div className="flex-1 h-px bg-gradient-to-r from-transparent to-yellow-400"></div>
+                  <span className="text-lg lg:text-xl text-yellow-300 font-medium px-4">
+                    PORQUE ESTAR A LA MODA ES TENERLO EN TU PANTALLA<br />
                   </span>
                   <div className="flex-1 h-px bg-gradient-to-l from-transparent to-yellow-400"></div>
                 </div>

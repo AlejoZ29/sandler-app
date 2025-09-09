@@ -75,7 +75,7 @@ export default function HomePage() {
 
       // Abrir primero el MovieModal; si con este clic se llega a 10, marcar para abrir Congrats al cerrar
       const newSize = clickedImages.size + 1;
-      if (newSize === 10) {
+      if (newSize === 10 || newSize === 19) {
         setPendingCongrats(true);
       }
       setSelectedMovie(polylineName);
@@ -594,7 +594,7 @@ export default function HomePage() {
           onMovieSelect={(movieName: string) => {
             setSelectedMovie(movieName);
             setModalOpen(true);
-            closeCongratsModal(); // Cerrar el CongratsModal
+            closeCongratsModal();
           }}
         />
       </div>
