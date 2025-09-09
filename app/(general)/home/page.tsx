@@ -114,7 +114,7 @@ export default function HomePage() {
                   Descubre mínimo 10 objetos ocultos de sus películas más famosas usando el puntero.
                 </p>
                 <p className="text-base md:text-lg mb-8 leading-relaxed w-8/12 mx-auto">
-                  Desbloquea looks inspirados en su estilo icónico y conoce sobre sus tíulos más destacados.
+                  Desbloquea looks inspirados en su estilo icónico y conoce sobre sus títulos más destacados.
                 </p>
                 <Button
                   textButton="Continuar"
