@@ -241,7 +241,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
               <>
                 {/* Poster */}
                 <div className="flex flex-col row-reverse justify-center items-center">
-                  <div className="flex justify-center">
+                  <div className="flex justify-center mb-5">
                     {finalMovieImage && finalMovieImage.trim() !== '' ? (
                       <Image
                         src={finalMovieImage}
