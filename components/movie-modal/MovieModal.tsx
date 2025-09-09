@@ -149,7 +149,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
       />
 
       <div
-        className="relative w-full h-full shadow-2xl border border-yellow-400/30 opacity-60 overflow-auto"
+        className="relative w-full h-full shadow-2xl border border-yellow-400/30 opacity-60 overflow-auto xl:overflow-hidden"
         style={{
           background: 'linear-gradient(to right, #010204, #214457, #0C1115)'
         }}
@@ -163,7 +163,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
           </svg>
         </button>
 
-        <div className="flex flex-col-reverse xl:grid xl:grid-cols-4 gap-8 h-full p-8 lg:p-32 opacity-100 overflow-auto">
+        <div className="flex flex-col-reverse xl:grid xl:grid-cols-4 gap-8 h-full p-8 lg:p-32 opacity-100 overflow-auto xl:overflow-hidden">
 
           <div className="flex xl:hidden justify-center xl:justify-start mt-12 my-6 md:my-0">
             <Button
