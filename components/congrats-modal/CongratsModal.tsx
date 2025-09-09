@@ -114,7 +114,7 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
             {clickedImages.size === 10 && (
               <>
                 <p className="text-xl lg:text-2xl text-white mb-4">
-                  Has completado con éxito el reto de encontrar los <span className="text-yellow-300 font-bold">10 elementos ocultos.</span>.
+                  Has completado con éxito el reto de encontrar los <span className="text-yellow-300 font-bold">10 elementos ocultos.</span>
                 </p>
                 <p className="text-lg lg:text-xl text-white mb-6">
                   Conoce todas las películas disponibles de Sony Pictures con Adam Sandler para que tu pantalla siempre este a la moda
