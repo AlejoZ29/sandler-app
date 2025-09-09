@@ -132,7 +132,7 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
             {clickedImages.size === 19 && (
               <>
                 <p className="text-xl lg:text-2xl text-white mb-4">
-                  Definitivamente The Sandler Cinematic Style vive en ti
+                  Definitivamente
                   <span className="text-yellow-300 font-bold"> The Sandler Cinematic Style</span> vive en ti.
                 </p>
                 <div className="flex items-center justify-center space-x-4 mb-8">
