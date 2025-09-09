@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useGame } from '@/app/context/GameContext';
 import moviesData from '@/app/data.json';
@@ -17,7 +17,6 @@ export const BackstageModal: React.FC<BackstageModalProps> = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [movieImageError, setMovieImageError] = useState(false);
   const [lookImageError, setLookImageError] = useState(false);
-  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   const allMovies = [
     'bigdaddy', 'spanglish', 'mrdeeds', 'clic', 'zookeeper', 
@@ -123,19 +122,7 @@ export const BackstageModal: React.FC<BackstageModalProps> = ({
     setCurrentIndex((prev) => (prev + 1) % allMovies.length);
   };
 
-  const resetScrollAndClose = () => {
-    try {
-      if (typeof window !== 'undefined') {
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
-      }
-      if (scrollContainerRef.current) {
-        scrollContainerRef.current.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
-      }
-    } catch {}
-    onClose();
-  };
-
-  const handleBackdropClick = () => resetScrollAndClose();
+  const handleBackdropClick = () => onClose();
 
   return (
     <div className="fixed inset-0 z-[2000] flex items-center justify-center">
@@ -149,10 +136,9 @@ export const BackstageModal: React.FC<BackstageModalProps> = ({
         style={{
           background: 'linear-gradient(to right, #010204, #214457, #0C1115)'
         }}
-        ref={scrollContainerRef}
       >
         <button
-          onClick={resetScrollAndClose}
+          onClick={onClose}
           className="hidden 2xl:block absolute bottom-[35%] lg:-top-4 lg:bottom-[90%] -right-[30%] lg:left-[90%] text-yellow-400 hover:text-white transition-colors duration-300 z-10 opacity-100 scale-10 xl:scale-100"
         >
           <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">

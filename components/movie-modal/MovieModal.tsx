@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components';
 import { Counter } from '@/components/counter/Counter';
@@ -22,8 +22,6 @@ export const MovieModal: React.FC<MovieModalProps> = ({
 }) => {
   const [movieImageError, setMovieImageError] = useState(false);
   const [lookImageError, setLookImageError] = useState(false);
-  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
-  const contentScrollRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (selectedMovie) {
@@ -34,24 +32,9 @@ export const MovieModal: React.FC<MovieModalProps> = ({
 
   if (!isOpen || !selectedMovie) return null;
 
-  const resetScrollAndClose = () => {
-    try {
-      if (typeof window !== 'undefined') {
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
-      }
-      if (scrollContainerRef.current) {
-        scrollContainerRef.current.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
-      }
-      if (contentScrollRef.current) {
-        contentScrollRef.current.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
-      }
-    } catch {}
-    onClose(true);
-  };
-
-  const handleBackdropClick = () => resetScrollAndClose();
-  const handleCloseButtonClick = () => resetScrollAndClose();
-  const handleContinueClick = () => resetScrollAndClose();
+  const handleBackdropClick = () => onClose(true);
+  const handleCloseButtonClick = () => onClose(true);
+  const handleContinueClick = () => onClose(true);
 
   // Función para convertir URL de YouTube a embed
   const getYouTubeEmbedUrl = (url: string) => {
@@ -170,7 +153,6 @@ export const MovieModal: React.FC<MovieModalProps> = ({
         style={{
           background: 'linear-gradient(to right, #010204, #214457, #0C1115)'
         }}
-        ref={scrollContainerRef}
       >
         <button
           onClick={handleCloseButtonClick}
@@ -181,7 +163,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({
           </svg>
         </button>
 
-        <div ref={contentScrollRef} className="flex flex-col-reverse xl:grid xl:grid-cols-4 gap-8 h-full p-8 lg:p-32 opacity-100 overflow-auto">
+        <div className="flex flex-col-reverse xl:grid xl:grid-cols-4 gap-8 h-full p-8 lg:p-32 opacity-100 overflow-auto">
 
           <div className="flex xl:hidden justify-center xl:justify-start mt-12 my-6 md:my-0">
             <Button
